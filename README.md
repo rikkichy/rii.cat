@@ -1,4 +1,10 @@
-# Nuxt UI Minimal Starter
+<h3 align="center">That's my website!</a></h3>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/rikkichy/rikkichy/refs/heads/main/img/dance.gif" alt="Yep, I'm too lazy to add new gif, OKAY?"/>
+</p>
+
+
+# Nuxt
 
 Look at [Nuxt docs](https://nuxt.com/docs/getting-started/introduction) and [Nuxt UI docs](https://ui.nuxt.com) to learn more.
 
