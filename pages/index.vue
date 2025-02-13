@@ -131,24 +131,28 @@
             <div class="flex items-center justify-between p-3">
               <div class="flex items-center gap-3">
                 <UIcon name="i-mdi-rabbit" class="w-5 h-5 text-gray-400" />
-                <span class="text-gray-400">{{ getProjects.kaomi }}</span>
+                <span class="text-gray-400">{{ getProjects.grem }}</span>
               </div>
               <UBadge color="gray" variant="subtle" label="Coming Soon" />
             </div>
           </UCard>
         </div>
       </section>
-
       <!-- Footer -->
-      <footer class="max-w-2xl mx-auto text-center text-sm text-gray-600 dark:text-gray-400 pb-8">
+      <footer class="max-w-2xl mx-auto text-center text-sm text-gray-500 dark:text-gray-400 pb-8">
         <p>Made with 💖 by me.</p>
-        <NuxtLink 
-          to="https://ko-fi.com/Rikkichy" 
-          target="_blank"
-          class="text-primary hover:underline">
-          Support on Ko-Fi!
-        </NuxtLink>
+        <p class="flex items-center justify-center gap-1">
+          <UIcon name="i-ri-open-source-fill" class="w-5 h-5 text-gray-600 dark:text-gray-400" />
+          Distributed under the
+          <NuxtLink 
+            to="https://github.com/rikkichy/rii.cat" 
+            target="_blank"
+            class="text-primary hover:underline">
+            GPL-3.0 License.
+          </NuxtLink>
+        </p>
       </footer>
+
     </main>
 
     <!-- Contact Modal -->
@@ -296,7 +300,7 @@ const getSocialLinks = computed(() => {
 
 const getProjects = computed(() => ({
   portfolio: transformProjectName('Portfolio'),
-  kaomi: transformProjectName('Kaomi')
+  grem: transformProjectName('Grem')
 }))
 
 // Transform functions
