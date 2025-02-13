@@ -1,0 +1,7 @@
+node_modules
+caddy
+Caddyfile
+revproxy
+.dockerignore
+Dockerfile
+.nuxt
