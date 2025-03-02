@@ -53,14 +53,18 @@
           <div class="relative mb-4">
             <div class="h-32 bg-primary-500 rounded-t-lg"></div>
             <div class="absolute left-1/2 -bottom-12 transform -translate-x-1/2">
-              <NuxtImg
-                preload
-                placeholder
-                quality="80"
-                src="/assets/img/pfp.png"
-                alt="Profile Picture"
-                class="w-24 h-24 rounded-full border-4 border-white dark:border-gray-900 object-cover"
-              />
+          <NuxtImg
+            preload
+            placeholder
+            quality="80"
+            src="/assets/img/pfp.png"
+            width="96"
+            height="96"
+            format="webp"
+            loading="eager"
+            alt="Profile Picture"
+            class="w-24 h-24 rounded-full border-4 border-white dark:border-gray-900 object-cover"
+          />
             </div>
           </div>
           
