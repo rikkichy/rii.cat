@@ -1,70 +1,32 @@
-// app.vue or index.vue
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
-    <!-- Settings Button -->
+  <UContainer>
     <div class="fixed top-4 right-4">
       <UButton
-        icon="i-heroicons-cog-6-tooth"
+        icon="i-ri-settings-2-fill"
         color="gray"
-        label="Settings"
         variant="ghost"
         @click="isSettingsModalOpen = true"
         aria-label="Open settings"
       />
     </div>
 
-    <!-- Settings Modal -->
-    <UModal v-model="isSettingsModalOpen">
-      <UCard>
-        <template #header>
-          <h3 class="text-lg font-semibold">Settings</h3>
-        </template>
+    <Settings v-model="isSettingsModalOpen" />
 
-        <div class="space-y-6 py-2">
-          <div class="flex items-center justify-between">
-            <span>Dark mode</span>
-            <UToggle v-model="isDark" />
-          </div>
-          <div class="flex items-center justify-between">
-            <span>Do not touch</span>
-            <UToggle v-model="magicEnabled" />
-          </div>
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span>Brainrot Level</span>
-              <span class="text-sm text-gray-500">{{ getBrainrotLabel }}</span>
-            </div>
-            <URange
-              v-model="brainrotLevel"
-              :step="25"
-              :min="0"
-              :max="100"
-              class="w-full"
-            />
-          </div>
-        </div>
-      </UCard>
-    </UModal>
-
-    <main class="container mx-auto px-4 py-8">
-      <!-- Profile Header -->
+    <main class="py-8">
       <div class="max-w-2xl mx-auto mb-8">
         <UCard class="text-center">
           <div class="relative mb-4">
             <div class="h-32 bg-primary-500 rounded-t-lg"></div>
             <div class="absolute left-1/2 -bottom-12 transform -translate-x-1/2">
-          <NuxtImg
-            preload
-            placeholder
-            quality="80"
-            src="/assets/img/pfp.png"
-            width="96"
-            height="96"
-            format="webp"
-            loading="eager"
-            alt="Profile Picture"
-            class="w-24 h-24 rounded-full border-4 border-white dark:border-gray-900 object-cover"
-          />
+              <NuxtImg
+                src="/assets/img/me.png"
+                width="96"
+                height="96"
+                format="webp"
+                loading="eager"
+                alt="Profile Picture"
+                class="w-24 h-24 rounded-full border-4 border-white dark:border-gray-900 object-cover"
+              />
             </div>
           </div>
           
@@ -82,67 +44,65 @@
             <UButton
               color="primary"
               variant="soft"
-              icon="i-heroicons-envelope"
+              icon="i-ri-send-plane-2-fill"
               label="Contact"
               @click="openContactModal"
             />
 
-            <div class="grid grid-cols-2 gap-4 pt-4">
-              <div>
-                <span class="text-sm text-gray-500">Oshi Marks</span>
-                <p class="text-lg">💢🎩</p>
+            <UDivider />
+
+            <UCard>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <UBadge color="gray" variant="subtle" label="Oshi Marks" />
+                  <p class="text-lg">💢🎩</p>
+                </div>
+                <div>
+                  <UBadge color="gray" variant="subtle" label="Alt. names" />
+                  <p>Rikki</p>
+                </div>
               </div>
-              <div>
-                <span class="text-sm text-gray-500">Alt. names</span>
-                <p>Rikki, Gremliko</p>
-              </div>
-            </div>
+            </UCard>
           </div>
         </UCard>
       </div>
 
-      <!-- Social Links -->
-      <section class="max-w-2xl mx-auto mb-8">
-        <h2 class="text-lg font-semibold mb-4">Social Links</h2>
-        <div class="space-y-3">
-          <UCard v-for="link in getSocialLinks" :key="link.name">
-            <a :href="link.url" target="_blank" rel="noopener" class="flex items-center justify-between p-3">
-              <div class="flex items-center gap-3">
-                <UIcon :name="link.icon" class="w-5 h-5" />
-                <span>{{ link.name }}</span>
-              </div>
-              <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
-            </a>
-          </UCard>
-        </div>
-      </section>
-
-      <!-- Projects -->
-      <section class="max-w-2xl mx-auto mb-8">
-        <h2 class="text-lg font-semibold mb-4">Projects</h2>
-        <div class="space-y-3">
-          <UCard>
-            <NuxtLink to="/portfolio" class="flex items-center justify-between p-3">
-              <div class="flex items-center gap-3">
-                <UIcon name="i-heroicons-folder" class="w-5 h-5" />
-                <span>{{ getProjects.portfolio }}</span>
-              </div>
-              <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
-            </NuxtLink>
-          </UCard>
-
-          <UCard class="bg-gray-50 dark:bg-gray-800">
-            <div class="flex items-center justify-between p-3">
-              <div class="flex items-center gap-3">
-                <UIcon name="i-mdi-rabbit" class="w-5 h-5 text-gray-400" />
-                <span class="text-gray-400">{{ getProjects.grem }}</span>
-              </div>
-              <UBadge color="gray" variant="subtle" label="Coming Soon" />
+      <h2 class="text-lg font-semibold max-w-2xl mx-auto mb-4">Social Links</h2>
+      <div class="max-w-2xl mx-auto mb-8 space-y-3">
+        <UCard v-for="link in getSocialLinks" :key="link.name">
+          <NuxtLink :to="link.url" target="_blank" rel="noopener" class="flex items-center justify-between p-3">
+            <div class="flex items-center gap-3">
+              <UIcon :name="link.icon" class="w-5 h-5" />
+              <span>{{ link.name }}</span>
             </div>
-          </UCard>
-        </div>
-      </section>
-      <!-- Footer -->
+            <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
+          </NuxtLink>
+        </UCard>
+      </div>
+
+      <h2 class="text-lg font-semibold max-w-2xl mx-auto mb-4">Projects</h2>
+      <div class="max-w-2xl mx-auto mb-8 space-y-3">
+        <UCard>
+          <NuxtLink to="/portfolio" class="flex items-center justify-between p-3">
+            <div class="flex items-center gap-3">
+              <UIcon name="i-heroicons-folder" class="w-5 h-5" />
+              <span>{{ getProjects.portfolio }}</span>
+            </div>
+            <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
+          </NuxtLink>
+        </UCard>
+
+        <UCard disabled>
+          <div class="flex items-center justify-between p-3">
+            <div class="flex items-center gap-3">
+              <UIcon name="i-mdi-rabbit" class="w-5 h-5" />
+              <span>{{ getProjects.grem }}</span>
+            </div>
+            <UBadge color="gray" variant="subtle" label="Coming Soon" />
+          </div>
+        </UCard>
+      </div>
+      
       <footer class="max-w-2xl mx-auto text-center text-sm text-gray-500 dark:text-gray-400 pb-8">
         <p>Made with 💖 by me.</p>
         <p class="flex items-center justify-center gap-1">
@@ -156,10 +116,8 @@
           </NuxtLink>
         </p>
       </footer>
-
     </main>
 
-    <!-- Contact Modal -->
     <UModal v-model="isContactModalOpen">
       <UCard>
         <template #header>
@@ -191,35 +149,37 @@
       </UCard>
     </UModal>
 
-    <!-- Email Modal -->
     <UModal v-model="isEmailModalOpen">
       <UCard>
         <template #header>
           <h3 class="text-lg font-semibold">Contact</h3>
         </template>
 
-      <div class="space-y-4 mb-4">
-          <div class="text-center">
-            <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Mail</h4>
-            <p 
-              class="font-mono bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 px-3 py-2 rounded inline-block cursor-pointer transition-colors"
-              :class="{ 'text-green-500': isCopied }"
+        <div class="space-y-4 mb-4">
+          
+          <UFormGroup label="Mail">
+            <UButton
+              color="gray"
+              variant="ghost"
+              icon="i-heroicons-clipboard"
+              class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
               @click="copyEmail"
             >
               rikkiads@pm.me
-            </p>
-          </div>
+            </UButton>
+          </UFormGroup>
           
-          <div class="text-center">
-            <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Manager's Discord</h4>
-            <p 
-              class="font-mono bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 px-3 py-2 rounded inline-block cursor-pointer transition-colors"
-              :class="{ 'text-green-500': isDiscordCopied }"
+          <UFormGroup label="Manager's Discord">
+            <UButton
+              color="gray"
+              variant="ghost"
+              icon="i-heroicons-clipboard"
+              class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
               @click="copyDiscord"
             >
               moustache.man
-            </p>
-          </div>
+            </UButton>
+          </UFormGroup>
         </div>
 
         <p class="text-sm text-gray-500 text-center">
@@ -227,57 +187,46 @@
         </p>
       </UCard>
     </UModal>
-  </div>
+  </UContainer>
 </template>
 
 <script setup lang="ts">
+import Settings from '~/components/Settings.vue'
 const colorMode = useColorMode()
+const useCopy = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text)
+    return true
+  } catch (err) {
+    console.error('Failed to copy:', err)
+    return false
+  }
+}
 
-// State management with refs
-const isContactModalOpen = ref(false)
-const isEmailModalOpen = ref(false)
-const isSettingsModalOpen = ref(false)
-const isCopied = ref(false)
-const magicEnabled = ref(false)
-const brainrotLevel = ref(0)
+const isContactModalOpen = useState('contactModal', () => false)
+const isEmailModalOpen = useState('emailModal', () => false)
+const isSettingsModalOpen = useState('settingsModal', () => false)
+const magicEnabled = useState('magicEnabled', () => false)
+const brainrotLevel = useState('brainrotLevel', () => 0)
 
-// Base data
+
 const baseLinks = [
   { 
     name: 'Discord', 
-    icon: 'i-bxl-discord-alt', 
+    icon: 'i-ri-discord-fill', 
     url: 'https://discord.gg/d9YtEe7Hr6' 
   },
   { 
     name: 'Twitch', 
-    icon: 'i-bxl-twitch', 
+    icon: 'i-ri-twitch-fill', 
     url: 'https://twitch.tv/rikkichy' 
   },
   { 
-    name: 'Twitter/X', 
-    icon: 'i-bxl-twitter', 
+    name: 'Twitter', 
+    icon: 'i-ri-twitter-x-fill', 
     url: 'https://x.com/rikkichy' 
   }
 ]
-
-// Computed properties
-const isDark = computed({
-  get: () => colorMode.value === 'dark',
-  set: (value) => {
-    colorMode.preference = value ? 'dark' : 'light'
-  }
-})
-
-const getBrainrotLabel = computed(() => {
-  switch (brainrotLevel.value) {
-    case 0: return 'Normal'
-    case 25: return 'Silly'
-    case 50: return 'Very Silly'
-    case 75: return 'Extra Silly'
-    case 100: return 'MAXIMUM SILLY'
-    default: return 'Normal'
-  }
-})
 
 const getProfileName = computed(() => {
   switch (brainrotLevel.value) {
@@ -304,10 +253,9 @@ const getSocialLinks = computed(() => {
 
 const getProjects = computed(() => ({
   portfolio: transformProjectName('Portfolio'),
-  grem: transformProjectName('Grem')
+  grem: transformProjectName('Grem Discord Bot')
 }))
 
-// Transform functions
 const transformSocialName = (name: string) => {
   switch (brainrotLevel.value) {
     case 25: return `${name} :3`
@@ -338,7 +286,6 @@ const transformText = (text: string) => {
   }
 }
 
-// Methods
 const openContactModal = () => {
   isContactModalOpen.value = true
 }
@@ -349,34 +296,46 @@ const openEmailModal = () => {
 }
 
 const copyEmail = async () => {
-  try {
-    await navigator.clipboard.writeText('rikkiads@pm.me')
-    isCopied.value = true
-    setTimeout(() => {
-      isCopied.value = false
-    }, 2000)
-  } catch (err) {
-    console.error('Failed to copy email:', err)
-  }
+  await useCopy('rikkiads@pm.me')
+  const toast = useToast()
+  toast.add({
+    title: 'Copied!',
+    description: 'Now my email address is somewhere in your clipboard..',
+    icon: 'i-ri-checkbox-multiple-fill',
+    timeout: 3500
+  })
+  isEmailModalOpen.value = false
 }
 
-// Page transition
+const copyDiscord = async () => {
+  await useCopy('moustache.man')
+  const toast = useToast()
+  toast.add({
+    title: 'Copied!',
+    description: 'Please do not annoy my manager..',
+    icon: 'i-ri-checkbox-multiple-fill',
+    timeout: 3500
+  })
+  isEmailModalOpen.value = false
+}
+
 definePageMeta({
   pageTransition: {
-    name: 'slide-fade'
+    name: 'page',
+    mode: 'out-in'
   }
 })
 </script>
 
 <style scoped>
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: all 0.3s ease;
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
 }
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
+.page-enter-from,
+.page-leave-to {
   opacity: 0;
-  transform: translateY(20px);
+  filter: blur(1rem);
+  transform: translateX(-10px);
 }
 </style>
