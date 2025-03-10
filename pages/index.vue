@@ -85,7 +85,7 @@
         <UCard>
           <NuxtLink to="/portfolio" class="flex items-center justify-between p-3">
             <div class="flex items-center gap-3">
-              <UIcon name="i-heroicons-folder" class="w-5 h-5" />
+              <UIcon name="i-ri-pencil-ruler-2-fill" class="w-5 h-5" />
               <span>{{ getProjects.portfolio }}</span>
             </div>
             <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
@@ -95,27 +95,13 @@
         <UCard disabled>
           <div class="flex items-center justify-between p-3">
             <div class="flex items-center gap-3">
-              <UIcon name="i-mdi-rabbit" class="w-5 h-5" />
-              <span>{{ getProjects.grem }}</span>
+              <UIcon name="i-ri-chrome-fill" class="w-5 h-5" />
+              <span>{{ getProjects.xenon }}</span>
             </div>
             <UBadge color="gray" variant="subtle" label="Coming Soon" />
           </div>
         </UCard>
       </div>
-      
-      <footer class="max-w-2xl mx-auto text-center text-sm text-gray-500 dark:text-gray-400 pb-8">
-        <p>Made with 💖 by me.</p>
-        <p class="flex items-center justify-center gap-1">
-          <UIcon name="i-ri-open-source-fill" class="w-5 h-5 text-gray-600 dark:text-gray-400" />
-          Distributed under the
-          <NuxtLink 
-            to="https://github.com/rikkichy/rii.cat" 
-            target="_blank"
-            class="text-primary hover:underline">
-            GPL-3.0 License.
-          </NuxtLink>
-        </p>
-      </footer>
     </main>
 
     <UModal v-model="isContactModalOpen">
@@ -252,8 +238,8 @@ const getSocialLinks = computed(() => {
 })
 
 const getProjects = computed(() => ({
-  portfolio: transformProjectName('Portfolio'),
-  grem: transformProjectName('Grem Discord Bot')
+  portfolio: transformProjectName('Commissions'),
+  xenon: transformProjectName('Xenon for Twitter')
 }))
 
 const transformSocialName = (name: string) => {
@@ -281,7 +267,7 @@ const transformText = (text: string) => {
     case 25: return `${text} :3`
     case 50: return `${text} (real)`
     case 75: return `${text}, professional rizzler and yapper`
-    case 100: return `🙀🙀🙀🙀🙀🙀 SIGMA MALE VTUBER 🐈🐈🐈🐈🐈🐈`
+    case 100: return `🙀🙀🙀CAT🐈🐈🐈`
     default: return text
   }
 }
@@ -318,24 +304,4 @@ const copyDiscord = async () => {
   })
   isEmailModalOpen.value = false
 }
-
-definePageMeta({
-  pageTransition: {
-    name: 'page',
-    mode: 'out-in'
-  }
-})
 </script>
-
-<style scoped>
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.4s;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
-  transform: translateX(-10px);
-}
-</style>
