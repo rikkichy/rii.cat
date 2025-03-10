@@ -141,11 +141,4 @@ const projects = [
       'https://www.youtube.com/embed/pdNzXv8QBKg?si=SWBszV8rI7vE8mZF',
   },
 ]
-
-definePageMeta({
-  pageTransition: {
-    name: 'rotate',
-    mode: 'out-in'
-  }
-})
 </script>
