@@ -3,5 +3,11 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxt/image",
   ],
-  compatibilityDate: "2024-07-04"
+  compatibilityDate: "2024-07-04",
+  app: {
+    pageTransition: {
+      name: 'page',
+      mode: 'out-in'
+    }
+  }
 })

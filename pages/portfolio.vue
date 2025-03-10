@@ -1,13 +1,6 @@
 <template>
   <div>
     <UContainer>
-      <UButton
-        icon="i-heroicons-home"
-        color="gray"
-        variant="ghost"
-        to="/"
-        class="fixed top-4 left-4 transition-transform duration-200 hover:translate-y-1"
-      />
       <UCard class="max-w-2xl px-4 py-10 mx-auto sm:px-8">
         <main
           class="max-w-none prose dark:prose-invert dark:prose-pre:bg-gray-900 hover:prose-a:text-primary-400
@@ -20,7 +13,7 @@
               I make edits in Premiere Pro & After Effects, also I make custom Discord bots...
               and websites too!
             </p>
-            <UButtonGroup orientation="vertical" class="w-full gap-4">
+            <UButtonGroup orientation="vertical" class="w-full gap-4 not-prose">
               <UButton
                 block
                 icon="i-mdi-offer"
@@ -57,7 +50,7 @@
                 slot: project.label,
                 icon: project.icon
               }))"
-              class="mb-6"
+              class="mb-6 not-prose"
             >
               <template v-for="project in projects" :key="project.label" #[project.label]>
                 <p class="mb-4">{{ project.content }}</p>
@@ -78,16 +71,18 @@
             <p>
               If videos are not showing up or you want to see more, you can click this button below!
             </p>
-            <UButton
-              color="red"
-              icon="i-bxl-youtube"
-              size="lg"
-              to="https://www.youtube.com/watch?v=pdNzXv8QBKg&list=PLR_6NYGLGA6YfjbgP8E-tmRRB8NAAN5t-"
-              class="transition-transform duration-200 hover:translate-y-1"
-              variant="solid"
-            >
-              YouTube Playlist
-            </UButton>
+            <div class="not-prose">
+              <UButton
+                color="red"
+                icon="i-bxl-youtube"
+                size="lg"
+                to="https://www.youtube.com/watch?v=pdNzXv8QBKg&list=PLR_6NYGLGA6YfjbgP8E-tmRRB8NAAN5t-"
+                class="transition-transform duration-200 hover:translate-y-1"
+                variant="solid"
+              >
+                YouTube Playlist
+              </UButton>
+            </div>
           </section>
 
           <section class="projects mb-8">
@@ -98,16 +93,18 @@
               my main page 👀
             </p>
             <p>You can see my other projects on my GitHub!</p>
-            <UButton
-              color="white"
-              icon="i-bxl-github"
-              size="lg"
-              to="https://github.com/ruecat?tab=repositories"
-              class="transition-transform duration-200 hover:translate-y-1"
-              variant="solid"
-            >
-              GitHub Projects
-            </UButton>
+            <div class="not-prose">
+              <UButton
+                color="white"
+                icon="i-bxl-github"
+                size="lg"
+                to="https://github.com/rikkichy?tab=repositories"
+                class="transition-transform duration-200 hover:translate-y-1"
+                variant="solid"
+              >
+                GitHub
+              </UButton>
+            </div>
           </section>
         </main>
         <UAlert
