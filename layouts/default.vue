@@ -6,6 +6,7 @@
           icon="i-ri-settings-2-fill"
           color="gray"
           variant="ghost"
+          size="xl"
           @click="isSettingsModalOpen = true"
           aria-label="Open settings"
         />

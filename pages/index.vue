@@ -1,14 +1,5 @@
 <template>
   <UContainer>
-    <div class="fixed top-4 right-4">
-      <UButton
-        icon="i-ri-settings-2-fill"
-        color="gray"
-        variant="ghost"
-        @click="isSettingsModalOpen = true"
-        aria-label="Open settings"
-      />
-    </div>
 
     <Settings v-model="isSettingsModalOpen" />
 
