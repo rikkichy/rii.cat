@@ -13,7 +13,7 @@
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <span>Secret Settings</span>
-            <UTooltip v-if="!secretEnabled" text="There's 40% chance to get a hint on reload..">
+            <UTooltip v-if="!secretEnabled" text="Find a key.">
               <UIcon name="i-heroicons-lock-closed" class="w-4 h-4 text-gray-400" />
             </UTooltip>
             <UTooltip v-else text="Secret settings unlocked!">
