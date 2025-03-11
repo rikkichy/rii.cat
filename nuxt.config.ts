@@ -23,8 +23,8 @@ export default defineNuxtConfig({
       githubUrl: process.env.NUXT_PUBLIC_GITHUB_URL || "https://github.com/rikkichy",
       
       // Contact Information
-      email: process.env.NUXT_PUBLIC_EMAIL || "rikkiads@pm.me",
-      managerDiscord: process.env.NUXT_PUBLIC_MANAGER_DISCORD || "moustache.man",
+      email: process.env.NUXT_PUBLIC_EMAIL || "yourmail@cat.meow",
+      managerDiscord: process.env.NUXT_PUBLIC_MANAGER_DISCORD || "your_discord_username",
       
       // Commission Links
       kofiUrl: process.env.NUXT_PUBLIC_KOFI_URL || "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
