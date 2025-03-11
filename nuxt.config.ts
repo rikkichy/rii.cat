@@ -17,9 +17,9 @@ export default defineNuxtConfig({
       siteDescription: process.env.NUXT_PUBLIC_SITE_DESCRIPTION || "Empty..",
       
       // Social Links
-      discordUrl: process.env.NUXT_PUBLIC_DISCORD_URL || "https://github.com/rikkichy/rii.cat",
-      twitchUrl: process.env.NUXT_PUBLIC_TWITCH_URL || "https://github.com/rikkichy/rii.cat",
-      twitterUrl: process.env.NUXT_PUBLIC_TWITTER_URL || "https://github.com/rikkichy/rii.cat",
+      discordUrl: process.env.NUXT_PUBLIC_DISCORD_URL || "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
+      twitchUrl: process.env.NUXT_PUBLIC_TWITCH_URL || "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
+      twitterUrl: process.env.NUXT_PUBLIC_TWITTER_URL || "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
       githubUrl: process.env.NUXT_PUBLIC_GITHUB_URL || "https://github.com/rikkichy",
       
       // Contact Information
@@ -27,8 +27,8 @@ export default defineNuxtConfig({
       managerDiscord: process.env.NUXT_PUBLIC_MANAGER_DISCORD || "moustache.man",
       
       // Commission Links
-      kofiUrl: process.env.NUXT_PUBLIC_KOFI_URL || "https://github.com/rikkichy/rii.cat",
-      vgenUrl: process.env.NUXT_PUBLIC_VGEN_URL || "https://github.com/rikkichy/rii.cat",
+      kofiUrl: process.env.NUXT_PUBLIC_KOFI_URL || "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
+      vgenUrl: process.env.NUXT_PUBLIC_VGEN_URL || "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
       
       // Feature Flags (will add more soon, maybe :3)
       enableSecretHint: process.env.NUXT_PUBLIC_ENABLE_SECRET_HINT || "true",
@@ -38,9 +38,9 @@ export default defineNuxtConfig({
       defaultBrainrotLevel: process.env.NUXT_PUBLIC_DEFAULT_BRAINROT_LEVEL || "0",
       
       // Portfolio
-      portfolioYoutubePlaylist: process.env.NUXT_PUBLIC_PORTFOLIO_YOUTUBE_PLAYLIST || "https://github.com/rikkichy/rii.cat",
-      portfolioBasicVideo: process.env.NUXT_PUBLIC_PORTFOLIO_BASIC_VIDEO || "https://github.com/rikkichy/rii.cat",
-      portfolioAdvancedVideo: process.env.NUXT_PUBLIC_PORTFOLIO_ADVANCED_VIDEO || "https://github.com/rikkichy/rii.cat",
+      portfolioYoutubePlaylist: process.env.NUXT_PUBLIC_PORTFOLIO_YOUTUBE_PLAYLIST || "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
+      portfolioBasicVideo: process.env.NUXT_PUBLIC_PORTFOLIO_BASIC_VIDEO || "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
+      portfolioAdvancedVideo: process.env.NUXT_PUBLIC_PORTFOLIO_ADVANCED_VIDEO || "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
     }
   }
 })
