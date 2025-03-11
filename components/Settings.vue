@@ -41,10 +41,6 @@
               <UIcon name="i-heroicons-sparkles" class="w-5 h-5 text-yellow-500" />
               Secret Settings
             </h4>
-            
-            <UFormGroup label="Custom Theme Color">
-              
-            </UFormGroup>
 
             <UFormGroup class="mt-4" label="Custom Theme">
               <USelect
@@ -56,8 +52,7 @@
 
             <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <p class="text-sm text-gray-600 dark:text-gray-400">
-                You've unlocked secret settings! These are just placeholders for now, but they would 
-                add fun customizations to your site.
+                You've unlocked secret settings! I will add something here soon, yep
               </p>
             </div>
           </div>
@@ -106,9 +101,9 @@ const getBrainrotLabel = computed(() => {
   switch (brainrotLevel.value) {
     case 0: return 'Normal'
     case 25: return 'Silly'
-    case 50: return 'Very Silly'
-    case 75: return 'Extra Silly'
-    case 100: return 'MAXIMUM SILLY'
+    case 50: return 'Cheese'
+    case 75: return 'What'
+    case 100: return 'AAAAAAAAAAA'
     default: return 'Normal'
   }
 })

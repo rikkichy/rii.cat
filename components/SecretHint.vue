@@ -1,4 +1,3 @@
-<!-- components/SecretHint.vue -->
 <template>
   <div>
     <!-- This component doesn't render anything visually but handles hint logic -->
@@ -11,21 +10,18 @@ const toast = useToast()
 
 // Hints for discovering secrets
 const hints = [
-  'Remember the Konami code?',
-  'Up, Up, Down, Down, Left, Right, Left, Right, B, A...',
-  'Press Ctrl+K to open the terminal..',
-  'Check the footer for clues!',
-  'Classic gaming techniques might unlock something special.',
+  'Press Ctrl+K or ⌘+K to open something..',
+  'There might be hidden commands in the command palette.',
+  'Try searching for "secret" in the command palette.',
 ]
 
-// Show a random hint after a random delay
 const showRandomHint = () => {
-  if (secretEnabled.value) return // Don't show hints if secrets already unlocked
+  if (secretEnabled.value) return
   
   const randomHint = hints[Math.floor(Math.random() * hints.length)]
   
   toast.add({
-    title: 'Secret Hint',
+    title: 'Hmm?',
     description: randomHint,
     icon: 'i-heroicons-sparkles',
     timeout: 5000,
@@ -34,7 +30,7 @@ const showRandomHint = () => {
 }
 
 onMounted(() => {
-  const shouldShowHint = Math.random() < 0.4 // 20% chance
+  const shouldShowHint = Math.random() < 0.4 // 40% chance
   
   if (shouldShowHint) {
     // Show hint after a random delay between 5-15 seconds

@@ -52,17 +52,6 @@ const openCommandPalette = () => {
   }
 }
 
-// Show secret hint
-const showSecretHint = () => {
-  const toast = useToast()
-  toast.add({
-    title: 'Secret Hint',
-    description: 'Up, Up, Down, Down, Left, Right, Left, Right, B, A...',
-    icon: 'i-heroicons-key',
-    timeout: 5000
-  })
-}
-
 // Set up keyboard shortcut for command palette
 onMounted(() => {
   window.addEventListener('keydown', handleKeyDown)
