@@ -1,3 +1,4 @@
+<!-- components/Settings.vue -->
 <template>
   <UModal v-model="isOpen">
     <UCard>
@@ -11,8 +12,16 @@
           <UToggle v-model="isDark" />
         </div>
         <div class="flex items-center justify-between">
-          <span>Secret Settings</span>
-          <UToggle v-model="secretEnabled" />
+          <div class="flex items-center gap-2">
+            <span>Secret Settings</span>
+            <UTooltip v-if="!secretEnabled" text="Find the hidden way to unlock">
+              <UIcon name="i-heroicons-lock-closed" class="w-4 h-4 text-gray-400" />
+            </UTooltip>
+            <UTooltip v-else text="Secret settings unlocked!">
+              <UIcon name="i-heroicons-lock-open" class="w-4 h-4 text-green-500" />
+            </UTooltip>
+          </div>
+          <UToggle v-model="secretEnabled" :disabled="!secretEnabled" />
         </div>
         <UFormGroup label="Brainrot Level" :help="getBrainrotLabel">
           <URange
@@ -23,6 +32,36 @@
             class="w-full"
           />
         </UFormGroup>
+
+        <!-- Secret Settings Section -->
+        <template v-if="secretEnabled">
+          <UDivider />
+          <div class="py-2">
+            <h4 class="text-base font-medium mb-4 flex items-center gap-2">
+              <UIcon name="i-heroicons-sparkles" class="w-5 h-5 text-yellow-500" />
+              Secret Settings
+            </h4>
+            
+            <UFormGroup label="Custom Theme Color">
+              
+            </UFormGroup>
+
+            <UFormGroup class="mt-4" label="Custom Theme">
+              <USelect
+                v-model="customTheme"
+                :options="customThemeOptions"
+                placeholder="Custom themes"
+              />
+            </UFormGroup>
+
+            <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                You've unlocked secret settings! These are just placeholders for now, but they would 
+                add fun customizations to your site.
+              </p>
+            </div>
+          </div>
+        </template>
       </div>
     </UCard>
   </UModal>
@@ -42,6 +81,14 @@ const colorMode = useColorMode()
 
 const secretEnabled = useState('secretEnabled', () => false)
 const brainrotLevel = useState('brainrotLevel', () => 0)
+const customThemeColor = useState('customThemeColor', () => '#FF69B4')
+const customTheme = useState('customTheme', () => 'none')
+
+const customThemeOptions = [
+  { label: 'None', value: 'none' },
+  { label: 'Neon', value: 'sparkles' },
+  { label: 'Nyan Cat', value: 'nyan' },
+]
 
 const isOpen = computed({
   get: () => props.modelValue,

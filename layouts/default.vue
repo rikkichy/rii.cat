@@ -1,7 +1,8 @@
+<!-- layouts/default.vue -->
 <template>
   <div>
     <UContainer>
-      <div class="fixed top-4 right-4 z-10">
+      <div class="fixed top-4 right-4 z-10 flex gap-2">
         <UButton
           icon="i-ri-settings-2-fill"
           color="gray"
@@ -12,7 +13,9 @@
         />
       </div>
 
+      <CommandPalette ref="commandPaletteRef" @unlock-secret="secretEnabled = true" />
       <Settings v-model="isSettingsModalOpen" />
+      <SecretHint />
 
       <slot />
 
@@ -35,6 +38,45 @@
 
 <script setup lang="ts">
 import Settings from '~/components/Settings.vue'
+import CommandPalette from '~/components/CommandPalette.vue'
+import SecretHint from '~/components/SecretHint.vue'
 
 const isSettingsModalOpen = useState('settingsModal', () => false)
+const secretEnabled = useState('secretEnabled', () => false)
+const commandPaletteRef = ref(null)
+
+// Open command palette
+const openCommandPalette = () => {
+  if (commandPaletteRef.value) {
+    commandPaletteRef.value.toggleTerminal()
+  }
+}
+
+// Show secret hint
+const showSecretHint = () => {
+  const toast = useToast()
+  toast.add({
+    title: 'Secret Hint',
+    description: 'Up, Up, Down, Down, Left, Right, Left, Right, B, A...',
+    icon: 'i-heroicons-key',
+    timeout: 5000
+  })
+}
+
+// Set up keyboard shortcut for command palette
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyDown)
+})
+
+const handleKeyDown = (e) => {
+  // Ctrl+K or Cmd+K to open command palette
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault()
+    openCommandPalette()
+  }
+}
 </script>
