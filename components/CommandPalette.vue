@@ -68,7 +68,7 @@ const commandGroups = computed(() => [
       {
         id: 'unlock-secret',
         icon: 'i-heroicons-key',
-        label: 'Unlock Secret Settings',
+        label: 'Golden Key',
         click: () => {
           secretEnabled.value = true
           toast.add({
