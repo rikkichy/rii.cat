@@ -6,7 +6,6 @@
 
 # Nuxt
 
-Look at [Nuxt docs](https://nuxt.com/docs/getting-started/introduction) and [Nuxt UI docs](https://ui.nuxt.com) to learn more.
 
 ## Setup
 
@@ -79,3 +78,7 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Customization
+
+Just rename .env.example to .env, replacing values you need!

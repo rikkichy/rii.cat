@@ -17,7 +17,7 @@
                 color="lime"
                 variant="solid"
                 size="lg"
-                to="https://vgen.co/Rikkichy"
+                :to="runtimeConfig.public.vgenUrl"
                 class="transition-all duration-300 hover:shadow-lg hover:shadow-lime-200/50 dark:hover:shadow-lime-900/50 transform hover:-translate-y-1 relative overflow-hidden group"
               >
                 <span class="relative z-10 font-medium">Commission me on VGen!</span>
@@ -29,7 +29,7 @@
                 color="blue"
                 variant="solid"
                 size="lg"
-                to="https://ko-fi.com/Rikkichy"
+                :to="runtimeConfig.public.kofiUrl"
                 class="transition-all duration-300 hover:shadow-lg hover:shadow-blue-200/50 dark:hover:shadow-blue-900/50 transform hover:-translate-y-1 relative overflow-hidden group"
               >
                 <span class="relative z-10 font-medium">Support me on Ko-Fi!</span>
@@ -78,7 +78,7 @@
             color="red"
             icon="i-ri-youtube-fill"
             size="lg"
-            to="https://www.youtube.com/watch?v=pdNzXv8QBKg&list=PLR_6NYGLGA6YfjbgP8E-tmRRB8NAAN5t-"
+            :to="runtimeConfig.public.portfolioYoutubePlaylist"
             class="transition-all duration-300 hover:shadow-lg hover:shadow-red-200/50 dark:hover:shadow-red-900/50 transform hover:-translate-y-1 relative overflow-hidden group"
             variant="solid"
           >
@@ -101,7 +101,7 @@
             color="gray"
             icon="i-ri-github-fill"
             size="lg"
-            to="https://github.com/rikkichy?tab=repositories"
+            :to="runtimeConfig.public.githubUrl"
             class="transition-all duration-300 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white transform hover:-translate-y-1 hover:shadow-lg hover:shadow-gray-500/20 relative overflow-hidden group"
             variant="solid"
           >
@@ -126,22 +126,22 @@
 </template>
 
 <script setup lang="ts">
+const runtimeConfig = useRuntimeConfig()
+
 const projects = [
   {
     icon: 'i-ri-movie-2-fill',
     label: 'Basic',
     content:
       'Does not include captions & their animation, just some camera movements to make your clip more engaging 👀',
-    videoSrc:
-      'https://www.youtube.com/embed/ZYFrF4HUVv0?si=w5EDatKTk67m52_O',
+    videoSrc: runtimeConfig.public.portfolioBasicVideo,
   },
   {
     icon: 'i-ri-movie-2-ai-fill',
     label: 'Advanced',
     content:
       'Includes animated captions (different styles), smooth camera animations, memes, image animations and more!',
-    videoSrc:
-      'https://www.youtube.com/embed/pdNzXv8QBKg?si=SWBszV8rI7vE8mZF',
+    videoSrc: runtimeConfig.public.portfolioAdvancedVideo,
   },
 ]
 </script>

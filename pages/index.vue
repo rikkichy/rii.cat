@@ -139,7 +139,7 @@
               class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
               @click="copyEmail"
             >
-              rikkiads@pm.me
+              {{ runtimeConfig.public.email }}
             </UButton>
           </UFormGroup>
           
@@ -151,7 +151,7 @@
               class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
               @click="copyDiscord"
             >
-              moustache.man
+              {{ runtimeConfig.public.managerDiscord }}
             </UButton>
           </UFormGroup>
         </div>
@@ -165,6 +165,7 @@
 </template>
 
 <script setup lang="ts">
+const runtimeConfig = useRuntimeConfig()
 const colorMode = useColorMode()
 const useCopy = async (text) => {
   try {
@@ -180,40 +181,39 @@ const isContactModalOpen = useState('contactModal', () => false)
 const isEmailModalOpen = useState('emailModal', () => false)
 const isSettingsModalOpen = useState('settingsModal', () => false)
 const magicEnabled = useState('magicEnabled', () => false)
-const brainrotLevel = useState('brainrotLevel', () => 0)
-
+const brainrotLevel = useState('brainrotLevel', () => parseInt(runtimeConfig.public.defaultBrainrotLevel) || 0)
 
 const baseLinks = [
   { 
     name: 'Discord', 
     icon: 'i-ri-discord-fill', 
-    url: 'https://discord.gg/d9YtEe7Hr6' 
+    url: runtimeConfig.public.discordUrl 
   },
   { 
     name: 'Twitch', 
     icon: 'i-ri-twitch-fill', 
-    url: 'https://twitch.tv/rikkichy' 
+    url: runtimeConfig.public.twitchUrl 
   },
   { 
     name: 'Twitter', 
     icon: 'i-ri-twitter-x-fill', 
-    url: 'https://x.com/rikkichy' 
+    url: runtimeConfig.public.twitterUrl
   }
 ]
 
 const getProfileName = computed(() => {
   switch (brainrotLevel.value) {
-    case 0: return 'Rikkichy'
+    case 0: return runtimeConfig.public.siteName
     case 25: return 'Cat :3'
     case 50: return 'Rizzichy'
     case 75: return '🔫 gato mafioso'
     case 100: return 'RIZZ MAFIA BOSS'
-    default: return 'Rikkichy'
+    default: return runtimeConfig.public.siteName
   }
 })
 
 const getProfileDescription = computed(() => {
-  const baseText = 'Mafia cat, on the Internet'
+  const baseText = runtimeConfig.public.siteDescription
   return transformText(baseText)
 })
 
@@ -269,7 +269,7 @@ const openEmailModal = () => {
 }
 
 const copyEmail = async () => {
-  await useCopy('rikkiads@pm.me')
+  await useCopy(runtimeConfig.public.email)
   const toast = useToast()
   toast.add({
     title: 'Copied!',
@@ -281,7 +281,7 @@ const copyEmail = async () => {
 }
 
 const copyDiscord = async () => {
-  await useCopy('moustache.man')
+  await useCopy(runtimeConfig.public.managerDiscord)
   const toast = useToast()
   toast.add({
     title: 'Copied!',

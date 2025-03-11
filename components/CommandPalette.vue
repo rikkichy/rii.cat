@@ -15,12 +15,13 @@
 </template>
 
 <script setup lang="ts">
+const runtimeConfig = useRuntimeConfig()
 const emit = defineEmits(['unlockSecret'])
 const open = ref(false)
 const commandPaletteRef = ref(null)
 const isSettingsModalOpen = useState('settingsModal', () => false)
 const secretEnabled = useState('secretEnabled', () => false)
-const brainrotLevel = useState('brainrotLevel', () => 0)
+const brainrotLevel = useState('brainrotLevel', () => parseInt(runtimeConfig.public.defaultBrainrotLevel) || 0)
 const router = useRouter()
 const toast = useToast()
 
@@ -213,21 +214,21 @@ const commandGroups = computed(() => [
         id: 'discord',
         icon: 'i-ri-discord-fill',
         label: 'Discord',
-        href: 'https://discord.gg/d9YtEe7Hr6',
+        href: runtimeConfig.public.discordUrl,
         target: '_blank',
       },
       {
         id: 'twitch',
         icon: 'i-ri-twitch-fill',
         label: 'Twitch',
-        href: 'https://twitch.tv/rikkichy',
+        href: runtimeConfig.public.twitchUrl,
         target: '_blank',
       },
       {
         id: 'twitter',
         icon: 'i-ri-twitter-x-fill',
         label: 'Twitter',
-        href: 'https://x.com/rikkichy',
+        href: runtimeConfig.public.twitterUrl,
         target: '_blank',
       },
     ],

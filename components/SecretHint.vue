@@ -1,10 +1,10 @@
 <template>
   <div>
-    <!-- This component doesn't render anything visually but handles hint logic -->
   </div>
 </template>
 
 <script setup lang="ts">
+const runtimeConfig = useRuntimeConfig()
 const secretEnabled = useState('secretEnabled', () => false)
 const toast = useToast()
 
@@ -30,12 +30,17 @@ const showRandomHint = () => {
 }
 
 onMounted(() => {
-  const shouldShowHint = Math.random() < 0.4 // 40% chance
+  // Check if hints are enabled in the environment config
+  const hintsEnabled = runtimeConfig.public.enableSecretHint === 'true'
   
-  if (shouldShowHint) {
-    // Show hint after a random delay between 5-15 seconds
-    const randomDelay = Math.floor(Math.random() * 10000) + 5000
-    setTimeout(showRandomHint, randomDelay)
+  if (hintsEnabled) {
+    const shouldShowHint = Math.random() < 0.4 // 40% chance
+    
+    if (shouldShowHint) {
+      // Show hint after a random delay between 5-15 seconds
+      const randomDelay = Math.floor(Math.random() * 10000) + 5000
+      setTimeout(showRandomHint, randomDelay)
+    }
   }
 })
 </script>

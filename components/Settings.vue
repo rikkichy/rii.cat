@@ -1,4 +1,3 @@
-<!-- components/Settings.vue -->
 <template>
   <UModal v-model="isOpen">
     <UCard>
@@ -33,7 +32,6 @@
           />
         </UFormGroup>
 
-        <!-- Secret Settings Section -->
         <template v-if="secretEnabled">
           <UDivider />
           <div class="py-2">
@@ -63,6 +61,7 @@
 </template>
 
 <script setup lang="ts">
+const runtimeConfig = useRuntimeConfig()
 const props = defineProps({
   modelValue: {
     type: Boolean,
@@ -75,7 +74,7 @@ const emit = defineEmits(['update:modelValue'])
 const colorMode = useColorMode()
 
 const secretEnabled = useState('secretEnabled', () => false)
-const brainrotLevel = useState('brainrotLevel', () => 0)
+const brainrotLevel = useState('brainrotLevel', () => parseInt(runtimeConfig.public.defaultBrainrotLevel) || 0)
 const customThemeColor = useState('customThemeColor', () => '#FF69B4')
 const customTheme = useState('customTheme', () => 'none')
 
