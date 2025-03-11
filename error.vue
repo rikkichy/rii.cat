@@ -57,10 +57,10 @@ onMounted(() => {
   })
 })
 
-// Define error page meta
 definePageMeta({
   pageTransition: {
-    name: 'bounce'
+    name: 'page',
+    mode: 'out-in'
   }
 })
 </script>
