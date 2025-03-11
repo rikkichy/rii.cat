@@ -11,8 +11,8 @@
           <UToggle v-model="isDark" />
         </div>
         <div class="flex items-center justify-between">
-          <span>Do not touch</span>
-          <UToggle v-model="magicEnabled" />
+          <span>Secret Settings</span>
+          <UToggle v-model="secretEnabled" />
         </div>
         <UFormGroup label="Brainrot Level" :help="getBrainrotLabel">
           <URange
@@ -40,7 +40,7 @@ const emit = defineEmits(['update:modelValue'])
 
 const colorMode = useColorMode()
 
-const magicEnabled = useState('magicEnabled', () => false)
+const secretEnabled = useState('secretEnabled', () => false)
 const brainrotLevel = useState('brainrotLevel', () => 0)
 
 const isOpen = computed({

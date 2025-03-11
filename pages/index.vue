@@ -1,8 +1,5 @@
 <template>
   <UContainer>
-
-    <Settings v-model="isSettingsModalOpen" />
-
     <main class="py-8">
       <div class="max-w-2xl mx-auto mb-8">
         <UCard class="text-center">
@@ -168,7 +165,6 @@
 </template>
 
 <script setup lang="ts">
-import Settings from '~/components/Settings.vue'
 const colorMode = useColorMode()
 const useCopy = async (text) => {
   try {
