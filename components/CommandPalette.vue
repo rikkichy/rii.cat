@@ -24,7 +24,6 @@ const brainrotLevel = useState('brainrotLevel', () => 0)
 const router = useRouter()
 const toast = useToast()
 
-// Command groups
 const commandGroups = computed(() => [
   {
     key: 'navigation',
@@ -44,7 +43,7 @@ const commandGroups = computed(() => [
       },
     ],
   },
-  {
+{
     key: 'actions',
     heading: 'Actions',
     commands: [
@@ -66,7 +65,33 @@ const commandGroups = computed(() => [
         },
       },
       {
-        id: 'unlock-secret',
+        id: 'silver-key',
+        icon: 'i-heroicons-key',
+        label: 'Silver Key',
+        click: () => {
+          toast.add({
+            title: 'Hmm...',
+            description: 'Seems like it doesn\'t work...',
+            icon: 'i-heroicons-lock-closed',
+            timeout: 3500
+          })
+        },
+      },
+      {
+        id: 'bronze-key',
+        icon: 'i-heroicons-key',
+        label: 'Bronze Key',
+        click: () => {
+          toast.add({
+            title: 'Hmm...',
+            description: 'Seems like it doesn\'t work...',
+            icon: 'i-heroicons-lock-closed',
+            timeout: 3500
+          })
+        },
+      },
+      {
+        id: 'golden-key',
         icon: 'i-heroicons-key',
         label: 'Golden Key',
         click: () => {
@@ -78,6 +103,32 @@ const commandGroups = computed(() => [
             timeout: 3500
           })
           emit('unlockSecret')
+        },
+      },
+      {
+        id: 'rusty-key',
+        icon: 'i-heroicons-key',
+        label: 'Rusty Key',
+        click: () => {
+          toast.add({
+            title: 'Hmm...',
+            description: 'Seems like it doesn\'t work...',
+            icon: 'i-heroicons-lock-closed',
+            timeout: 3500
+          })
+        },
+      },
+      {
+        id: 'crystal-key',
+        icon: 'i-heroicons-key',
+        label: 'Crystal Key',
+        click: () => {
+          toast.add({
+            title: 'Hmm...',
+            description: 'Seems like it doesn\'t work...',
+            icon: 'i-heroicons-lock-closed',
+            timeout: 3500
+          })
         },
       },
     ],
@@ -187,7 +238,6 @@ const filteredGroups = computed(() => {
   return commandGroups.value
 })
 
-// Handle selection with the onSelect handler
 function onSelect(option) {
   if (option.click) {
     option.click()
@@ -196,17 +246,13 @@ function onSelect(option) {
   } else if (option.href) {
     window.open(option.href, option.target || '_self')
   }
-  
-  // Close the command palette
   open.value = false
 }
 
-// Method to toggle command palette
 const toggleTerminal = () => {
   open.value = !open.value
 }
 
-// Expose methods and properties
 defineExpose({
   open,
   toggleTerminal
