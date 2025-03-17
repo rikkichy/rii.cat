@@ -1,15 +1,21 @@
 <!-- components/CommandPalette.vue -->
 <template>
   <div>
-    <UModal v-model="open">
-      <UCommandPalette
-        ref="commandPaletteRef"
-        :groups="filteredGroups"
-        :fuse="{ resultLimit: 20 }"
-        placeholder="Wait, you shouldn't be here.."
-        @update:model-value="onSelect"
-        :autoselect="true"
-      />
+    <UModal v-model:open="open">
+      <template #default>
+        <!-- Empty default slot -->
+      </template>
+      
+      <template #content>
+        <UCommandPalette
+          ref="commandPaletteRef"
+          :groups="filteredGroups"
+          :fuse="{ resultLimit: 20 }"
+          placeholder="Wait, you shouldn't be here.."
+          @update:model-value="onSelect"
+          :autoselect="true"
+        />
+      </template>
     </UModal>
   </div>
 </template>
@@ -74,7 +80,7 @@ const commandGroups = computed(() => [
             title: 'Hmm...',
             description: 'Seems like it doesn\'t work...',
             icon: 'i-heroicons-lock-closed',
-            timeout: 3500
+            duration: 3500
           })
         },
       },
@@ -87,7 +93,7 @@ const commandGroups = computed(() => [
             title: 'Hmm...',
             description: 'Seems like it doesn\'t work...',
             icon: 'i-heroicons-lock-closed',
-            timeout: 3500
+            duration: 3500
           })
         },
       },
@@ -101,7 +107,7 @@ const commandGroups = computed(() => [
             title: 'Something changed..?',
             description: 'You heard a clicking sound near settings..',
             icon: 'i-heroicons-lock-open',
-            timeout: 3500
+            duration: 3500
           })
           emit('unlockSecret')
         },
@@ -115,7 +121,7 @@ const commandGroups = computed(() => [
             title: 'Hmm...',
             description: 'Seems like it doesn\'t work...',
             icon: 'i-heroicons-lock-closed',
-            timeout: 3500
+            duration: 3500
           })
         },
       },
@@ -128,7 +134,7 @@ const commandGroups = computed(() => [
             title: 'Hmm...',
             description: 'Seems like it doesn\'t work...',
             icon: 'i-heroicons-lock-closed',
-            timeout: 3500
+            duration: 3500
           })
         },
       },
@@ -147,7 +153,7 @@ const commandGroups = computed(() => [
           toast.add({
             title: 'Normal Mode Activated',
             icon: 'i-heroicons-face-smile',
-            timeout: 2000
+            duration: 2000
           })
         },
       },
@@ -160,7 +166,7 @@ const commandGroups = computed(() => [
           toast.add({
             title: 'Silly Mode Activated :3',
             icon: 'i-heroicons-face-smile',
-            timeout: 2000
+            duration: 2000
           })
         },
       },
@@ -173,7 +179,7 @@ const commandGroups = computed(() => [
           toast.add({
             title: 'Very Silly Mode Activated (real)',
             icon: 'i-heroicons-face-smile',
-            timeout: 2000
+            duration: 2000
           })
         },
       },
@@ -187,7 +193,7 @@ const commandGroups = computed(() => [
             title: 'Extra Silly Mode Activated',
             description: 'professional rizzler and yapper',
             icon: 'i-heroicons-face-smile',
-            timeout: 2000
+            duration: 2000
           })
         },
       },
@@ -200,7 +206,7 @@ const commandGroups = computed(() => [
           toast.add({
             title: '🙀🙀🙀CAT🐈🐈🐈',
             icon: 'i-heroicons-face-smile',
-            timeout: 2000
+            duration: 2000
           })
         },
       },

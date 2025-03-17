@@ -14,26 +14,22 @@
               <UButton
                 block
                 icon="i-ri-attachment-line"
-                color="lime"
+                color="success"
                 variant="solid"
                 size="lg"
                 :to="runtimeConfig.public.vgenUrl"
-                class="transition-all duration-300 hover:shadow-lg hover:shadow-lime-200/50 dark:hover:shadow-lime-900/50 transform hover:-translate-y-1 relative overflow-hidden group"
               >
-                <span class="relative z-10 font-medium">Commission me on VGen!</span>
-                <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                Commission me on VGen!
               </UButton>
               <UButton
                 block
                 icon="i-cib-ko-fi"
-                color="blue"
+                color="info"
                 variant="solid"
                 size="lg"
                 :to="runtimeConfig.public.kofiUrl"
-                class="transition-all duration-300 hover:shadow-lg hover:shadow-blue-200/50 dark:hover:shadow-blue-900/50 transform hover:-translate-y-1 relative overflow-hidden group"
               >
-                <span class="relative z-10 font-medium">Support me on Ko-Fi!</span>
-                <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                Support me on Ko-Fi!
               </UButton>
             </div>
           </div>
@@ -79,11 +75,9 @@
             icon="i-ri-youtube-fill"
             size="lg"
             :to="runtimeConfig.public.portfolioYoutubePlaylist"
-            class="transition-all duration-300 hover:shadow-lg hover:shadow-red-200/50 dark:hover:shadow-red-900/50 transform hover:-translate-y-1 relative overflow-hidden group"
             variant="solid"
           >
-            <span class="relative z-10 font-medium">YouTube Playlist</span>
-            <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            YouTube Playlist
           </UButton>
         </UCard>
       </div>
@@ -98,15 +92,13 @@
           <p class="mb-4">You can see my other projects on my GitHub!</p>
           <UButton
             block
-            color="gray"
+            color="neutral"
             icon="i-ri-github-fill"
             size="lg"
             :to="runtimeConfig.public.githubUrl"
-            class="transition-all duration-300 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white transform hover:-translate-y-1 hover:shadow-lg hover:shadow-gray-500/20 relative overflow-hidden group"
             variant="solid"
           >
-            <span class="relative z-10 font-medium">My GitHub</span>
-            <span class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            My GitHub
           </UButton>
         </UCard>
         

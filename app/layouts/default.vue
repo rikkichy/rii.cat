@@ -44,14 +44,12 @@ const isSettingsModalOpen = useState('settingsModal', () => false)
 const secretEnabled = useState('secretEnabled', () => false)
 const commandPaletteRef = ref(null)
 
-// Open command palette
 const openCommandPalette = () => {
   if (commandPaletteRef.value) {
     commandPaletteRef.value.toggleTerminal()
   }
 }
 
-// Set up keyboard shortcut for command palette
 onMounted(() => {
   window.addEventListener('keydown', handleKeyDown)
 })
@@ -61,7 +59,6 @@ onUnmounted(() => {
 })
 
 const handleKeyDown = (e) => {
-  // Ctrl+K or Cmd+K to open command palette
   if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
     e.preventDefault()
     openCommandPalette()

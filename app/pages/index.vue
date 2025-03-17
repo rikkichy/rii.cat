@@ -34,16 +34,17 @@
               variant="soft"
               icon="i-ri-send-plane-2-fill"
               label="Contact"
+              size="xl"
               @click="openContactModal"
             />
 
-            <UDivider />
+            <USeparator />
 
             <UCard>
               <div class="grid grid-cols-2 gap-4">
                 <div>
                   <UBadge color="gray" variant="subtle" label="Oshi Marks" />
-                  <p class="text-lg">💢🎩</p>
+                  <p class="text-lg">🍷💢</p>
                 </div>
                 <div>
                   <UBadge color="gray" variant="subtle" label="Alt. names" />
@@ -92,74 +93,86 @@
       </div>
     </main>
 
-    <UModal v-model="isContactModalOpen">
-      <UCard>
-        <template #header>
-          <h3 class="text-lg font-semibold">Business Inquiries Only</h3>
-        </template>
+    <UModal v-model:open="isContactModalOpen">
+      <template #default>
+        <!-- Empty default slot -->
+      </template>
+      
+      <template #content>
+        <UCard>
+          <template #header>
+            <h3 class="text-lg font-semibold">Business Inquiries Only</h3>
+          </template>
 
-        <p class="text-gray-600 dark:text-gray-400 mb-4">
-          Please proceed only if you represent a company.
-          Fan mail will not be responded to :(
-        </p>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">
+            Please proceed only if you represent a company.
+            Fan mail will not be responded to :(
+          </p>
 
-        <template #footer>
-          <div class="flex flex-col gap-2">
-            <UButton
-              block
-              color="primary"
-              @click="openEmailModal"
-              label="I understand, continue"
-            />
-            <UButton
-              block
-              color="gray"
-              variant="ghost"
-              @click="isContactModalOpen = false"
-              label="Cancel"
-            />
-          </div>
-        </template>
-      </UCard>
+          <template #footer>
+            <div class="flex flex-col gap-2">
+              <UButton
+                block
+                color="primary"
+                @click="openEmailModal"
+                label="I understand, continue"
+              />
+              <UButton
+                block
+                color="gray"
+                variant="ghost"
+                @click="isContactModalOpen = false"
+                label="Cancel"
+              />
+            </div>
+          </template>
+        </UCard>
+      </template>
     </UModal>
 
-    <UModal v-model="isEmailModalOpen">
-      <UCard>
-        <template #header>
-          <h3 class="text-lg font-semibold">Contact</h3>
-        </template>
+    <UModal v-model:open="isEmailModalOpen">
+      <template #default>
+        <!-- Empty default slot -->
+      </template>
+      
+      <template #content>
+        <UCard>
+          <template #header>
+            <h3 class="text-lg font-semibold">Contact</h3>
+          </template>
 
-        <div class="space-y-4 mb-4">
-          
-          <UFormGroup label="Mail">
-            <UButton
-              color="gray"
-              variant="ghost"
-              icon="i-heroicons-clipboard"
-              class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
-              @click="copyEmail"
-            >
-              {{ runtimeConfig.public.email }}
-            </UButton>
-          </UFormGroup>
-          
-          <UFormGroup label="Manager's Discord">
-            <UButton
-              color="gray"
-              variant="ghost"
-              icon="i-heroicons-clipboard"
-              class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
-              @click="copyDiscord"
-            >
-              {{ runtimeConfig.public.managerDiscord }}
-            </UButton>
-          </UFormGroup>
-        </div>
+          <div class="space-y-4 mb-4">
+            
+            <UFormField label="Mail">
+              <UButton
+                color="gray"
+                variant="ghost"
+                icon="i-heroicons-clipboard"
+                class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
+                @click="copyEmail"
+              >
+                {{ runtimeConfig.public.email }}
+              </UButton>
+            </UFormField>
+            
+            <UFormField label="Manager's Discord">
+              <UButton
+                color="gray"
+                variant="ghost"
+                icon="i-heroicons-clipboard"
+                class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
+                @click="copyDiscord"
+              >
+                {{ runtimeConfig.public.managerDiscord }}
+              </UButton>
+            </UFormField>
+          </div>
 
-        <p class="text-sm text-gray-500 text-center">
-          Click to copy
-        </p>
-      </UCard>
+          <p class="text-sm text-gray-500 text-center">
+            Click to copy
+          </p>
+        </UCard>
+      </template>
     </UModal>
   </UContainer>
 </template>
@@ -275,7 +288,7 @@ const copyEmail = async () => {
     title: 'Copied!',
     description: 'Now my email address is somewhere in your clipboard..',
     icon: 'i-ri-checkbox-multiple-fill',
-    timeout: 3500
+    duration: 3500
   })
   isEmailModalOpen.value = false
 }
@@ -287,7 +300,7 @@ const copyDiscord = async () => {
     title: 'Copied!',
     description: 'Please do not annoy my manager..',
     icon: 'i-ri-checkbox-multiple-fill',
-    timeout: 3500
+    duration: 3500
   })
   isEmailModalOpen.value = false
 }

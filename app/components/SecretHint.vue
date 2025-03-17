@@ -23,7 +23,7 @@ const showRandomHint = () => {
     title: 'Hmm?',
     description: randomHint,
     icon: 'i-heroicons-sparkles',
-    timeout: 5000,
+    duration: 5000,
     color: 'gray'
   })
 }
@@ -39,15 +39,11 @@ watch(isSettingsModalOpen, (newValue) => {
 })
 
 onMounted(() => {
-  // Check if hints are enabled in the environment config
   const hintsEnabled = runtimeConfig.public.enableSecretHint === 'true'
-  
-  // We'll keep this for first page load, but with a lower chance
   if (hintsEnabled) {
-    const shouldShowHint = Math.random() < 0.2 // Reduced to 20% chance on page load
+    const shouldShowHint = Math.random() < 0.2
     
     if (shouldShowHint) {
-      // Show hint immediately without delay
       showRandomHint()
     }
   }
