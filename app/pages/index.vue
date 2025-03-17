@@ -31,7 +31,7 @@
             
             <UButton
               color="primary"
-              variant="soft"
+              variant="subtle"
               icon="i-ri-send-plane-2-fill"
               label="Contact"
               size="xl"
@@ -119,10 +119,10 @@
               />
               <UButton
                 block
-                color="gray"
+                color="neutral"
                 variant="ghost"
                 @click="isContactModalOpen = false"
-                label="Cancel"
+                label="Go back.."
               />
             </div>
           </template>
@@ -145,7 +145,7 @@
             
             <UFormField label="Mail">
               <UButton
-                color="gray"
+                color="neutral"
                 variant="ghost"
                 icon="i-heroicons-clipboard"
                 class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
@@ -157,7 +157,7 @@
             
             <UFormField label="Manager's Discord">
               <UButton
-                color="gray"
+                color="neutral"
                 variant="ghost"
                 icon="i-heroicons-clipboard"
                 class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"

@@ -9,6 +9,13 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4
   },
+  // forgot to add after migrating config, whoops
+  app: {
+    pageTransition: {
+      name: 'page',
+      mode: 'out-in'
+    }
+  },
 
   compatibilityDate: '2024-11-27',
   runtimeConfig: {

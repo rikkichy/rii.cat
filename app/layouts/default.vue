@@ -4,7 +4,7 @@
       <div class="fixed top-4 right-4 z-10 flex gap-2">
         <UButton
           icon="i-ri-settings-2-fill"
-          color="gray"
+          color="neutral"
           variant="ghost"
           size="xl"
           @click="isSettingsModalOpen = true"
