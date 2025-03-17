@@ -1,15 +1,16 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    "@nuxt/ui",
-    "@nuxt/image",
-  ],
-  compatibilityDate: "2024-07-04",
-  app: {
-    pageTransition: {
-      name: 'page',
-      mode: 'out-in'
-    }
+  devtools: { enabled: true },
+
+  modules: ['@nuxt/ui', '@nuxt/eslint', '@nuxt/image'],
+
+  css: ['~/assets/css/main.css'],
+
+  future: {
+    compatibilityVersion: 4
   },
+
+  compatibilityDate: '2024-11-27',
   runtimeConfig: {
     public: {
       // Site Information

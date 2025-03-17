@@ -1,9 +1,9 @@
 <template>
-  <NuxtLayout>
-    <UNotifications />
+  <UApp>
     <NuxtPage />
-  </NuxtLayout>
+  </UApp>
 </template>
+
 
 <style>
 .page-enter-active,

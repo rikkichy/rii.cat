@@ -7,7 +7,7 @@
             <div class="h-32 bg-primary-500 rounded-t-lg"></div>
             <div class="absolute left-1/2 -bottom-12 transform -translate-x-1/2">
               <NuxtImg
-                src="/assets/img/me.png"
+                src="pfp.png"
                 width="96"
                 height="96"
                 format="webp"
@@ -55,7 +55,7 @@
         </UCard>
       </div>
 
-      <h2 class="text-lg font-semibold max-w-2xl mx-auto mb-4">Social Links</h2>
+      <h2 class="text-lg font-semibold max-w-2xl mx-auto mb-4">Socials</h2>
       <div class="max-w-2xl mx-auto mb-8 space-y-3">
         <UCard v-for="link in getSocialLinks" :key="link.name">
           <NuxtLink :to="link.url" target="_blank" rel="noopener" class="flex items-center justify-between p-3">
@@ -68,7 +68,7 @@
         </UCard>
       </div>
 
-      <h2 class="text-lg font-semibold max-w-2xl mx-auto mb-4">Projects</h2>
+      <h2 class="text-lg font-semibold max-w-2xl mx-auto mb-4">Other</h2>
       <div class="max-w-2xl mx-auto mb-8 space-y-3">
         <UCard>
           <NuxtLink to="/portfolio" class="flex items-center justify-between p-3">
