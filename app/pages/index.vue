@@ -162,7 +162,6 @@
             
             <UFormField label="Mail">
               <UButton
-                color="neutral"
                 variant="ghost"
                 icon="i-heroicons-clipboard"
                 class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
@@ -174,7 +173,6 @@
             
             <UFormField label="Manager's Discord">
               <UButton
-                color="neutral"
                 variant="ghost"
                 icon="i-heroicons-clipboard"
                 class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
