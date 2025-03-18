@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxt/eslint', '@nuxt/image', "@nuxt/scripts"],
 
   css: ['~/assets/css/main.css'],
+  nitro: {
+    preset: 'bun',
+  },
 
   future: {
     compatibilityVersion: 4
