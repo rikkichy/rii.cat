@@ -30,7 +30,6 @@
             <p class="text-gray-600 dark:text-gray-400">{{ getProfileDescription }}</p>
             
             <UButton
-              color="primary"
               variant="subtle"
               icon="i-ri-send-plane-2-fill"
               label="Contact"

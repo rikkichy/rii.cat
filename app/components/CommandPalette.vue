@@ -1,19 +1,16 @@
-<!-- components/CommandPalette.vue -->
 <template>
   <div>
-    <UModal v-model:open="open">
-      <template #default>
-        <!-- Empty default slot -->
-      </template>
-      
+    <UModal v-model:open="open" @close="handleModalClose">
       <template #content>
         <UCommandPalette
           ref="commandPaletteRef"
-          :groups="filteredGroups"
+          v-model="selectedItem"
+          :groups="commandGroups"
           :fuse="{ resultLimit: 20 }"
           placeholder="Wait, you shouldn't be here.."
-          @update:model-value="onSelect"
           :autoselect="true"
+          @update:model-value="handleSelect"
+          @close="handleClose"
         />
       </template>
     </UModal>
@@ -24,6 +21,7 @@
 const runtimeConfig = useRuntimeConfig()
 const emit = defineEmits(['unlockSecret'])
 const open = ref(false)
+const selectedItem = ref(null)
 const commandPaletteRef = ref(null)
 const isSettingsModalOpen = useState('settingsModal', () => false)
 const secretEnabled = useState('secretEnabled', () => false)
@@ -33,9 +31,9 @@ const toast = useToast()
 
 const commandGroups = computed(() => [
   {
-    key: 'navigation',
-    heading: 'Navigation',
-    commands: [
+    id: 'navigation',
+    label: 'Navigation',
+    items: [
       {
         id: 'home',
         icon: 'i-heroicons-home',
@@ -50,15 +48,15 @@ const commandGroups = computed(() => [
       },
     ],
   },
-{
-    key: 'actions',
-    heading: 'Actions',
-    commands: [
+  {
+    id: 'actions',
+    label: 'Actions',
+    items: [
       {
         id: 'settings',
         icon: 'i-ri-settings-2-fill',
         label: 'Open Settings',
-        click: () => {
+        onClick() {
           isSettingsModalOpen.value = true
         },
       },
@@ -66,7 +64,7 @@ const commandGroups = computed(() => [
         id: 'theme',
         icon: 'i-heroicons-moon',
         label: 'Toggle Dark Mode',
-        click: () => {
+        onClick() {
           const colorMode = useColorMode()
           colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
         },
@@ -75,7 +73,7 @@ const commandGroups = computed(() => [
         id: 'silver-key',
         icon: 'i-heroicons-key',
         label: 'Silver Key',
-        click: () => {
+        onClick() {
           toast.add({
             title: 'Hmm...',
             description: 'Seems like it doesn\'t work...',
@@ -88,7 +86,7 @@ const commandGroups = computed(() => [
         id: 'bronze-key',
         icon: 'i-heroicons-key',
         label: 'Bronze Key',
-        click: () => {
+        onClick() {
           toast.add({
             title: 'Hmm...',
             description: 'Seems like it doesn\'t work...',
@@ -101,7 +99,7 @@ const commandGroups = computed(() => [
         id: 'golden-key',
         icon: 'i-heroicons-key',
         label: 'Golden Key',
-        click: () => {
+        onClick() {
           secretEnabled.value = true
           toast.add({
             title: 'Something changed..?',
@@ -116,7 +114,7 @@ const commandGroups = computed(() => [
         id: 'rusty-key',
         icon: 'i-heroicons-key',
         label: 'Rusty Key',
-        click: () => {
+        onClick() {
           toast.add({
             title: 'Hmm...',
             description: 'Seems like it doesn\'t work...',
@@ -129,7 +127,7 @@ const commandGroups = computed(() => [
         id: 'crystal-key',
         icon: 'i-heroicons-key',
         label: 'Crystal Key',
-        click: () => {
+        onClick() {
           toast.add({
             title: 'Hmm...',
             description: 'Seems like it doesn\'t work...',
@@ -141,14 +139,14 @@ const commandGroups = computed(() => [
     ],
   },
   {
-    key: 'silly',
-    heading: 'Silly Settings',
-    commands: [
+    id: 'silly',
+    label: 'Silly Settings',
+    items: [
       {
         id: 'normal',
         icon: 'i-heroicons-face-smile',
         label: 'Normal Mode',
-        click: () => {
+        onClick() {
           brainrotLevel.value = 0
           toast.add({
             title: 'Normal Mode Activated',
@@ -161,7 +159,7 @@ const commandGroups = computed(() => [
         id: 'silly',
         icon: 'i-heroicons-face-smile',
         label: 'Silly Mode',
-        click: () => {
+        onClick() {
           brainrotLevel.value = 25
           toast.add({
             title: 'Silly Mode Activated :3',
@@ -174,7 +172,7 @@ const commandGroups = computed(() => [
         id: 'very-silly',
         icon: 'i-heroicons-face-smile',
         label: 'Very Silly Mode',
-        click: () => {
+        onClick() {
           brainrotLevel.value = 50
           toast.add({
             title: 'Very Silly Mode Activated (real)',
@@ -187,7 +185,7 @@ const commandGroups = computed(() => [
         id: 'extra-silly',
         icon: 'i-heroicons-face-smile',
         label: 'Extra Silly Mode',
-        click: () => {
+        onClick() {
           brainrotLevel.value = 75
           toast.add({
             title: 'Extra Silly Mode Activated',
@@ -201,7 +199,7 @@ const commandGroups = computed(() => [
         id: 'maximum-silly',
         icon: 'i-heroicons-face-smile',
         label: 'MAXIMUM SILLY MODE',
-        click: () => {
+        onClick() {
           brainrotLevel.value = 100
           toast.add({
             title: '🙀🙀🙀CAT🐈🐈🐈',
@@ -213,50 +211,71 @@ const commandGroups = computed(() => [
     ],
   },
   {
-    key: 'social',
-    heading: 'Social Links',
-    commands: [
+    id: 'social',
+    label: 'Social Links',
+    items: [
       {
         id: 'discord',
         icon: 'i-ri-discord-fill',
         label: 'Discord',
-        href: runtimeConfig.public.discordUrl,
+        to: runtimeConfig.public.discordUrl,
         target: '_blank',
       },
       {
         id: 'twitch',
         icon: 'i-ri-twitch-fill',
         label: 'Twitch',
-        href: runtimeConfig.public.twitchUrl,
+        to: runtimeConfig.public.twitchUrl,
         target: '_blank',
       },
       {
         id: 'twitter',
         icon: 'i-ri-twitter-x-fill',
         label: 'Twitter',
-        href: runtimeConfig.public.twitterUrl,
+        to: runtimeConfig.public.twitterUrl,
         target: '_blank',
       },
     ],
   },
 ])
 
-const filteredGroups = computed(() => {
-  return commandGroups.value
-})
+function handleSelect(item) {
+  if (!item) return
 
-function onSelect(option) {
-  if (option.click) {
-    option.click()
-  } else if (option.to) {
-    router.push(option.to)
-  } else if (option.href) {
-    window.open(option.href, option.target || '_self')
+  console.log('Selected item:', item)
+  
+  if (item.onClick && typeof item.onClick === 'function') {
+    item.onClick()
+  } else if (item.onSelect && typeof item.onSelect === 'function') {
+    item.onSelect()
+  } else if (item.action && typeof item.action === 'function') {
+    item.action()
+  } else if (item.to) {
+    if (item.to.startsWith('http')) {
+      window.open(item.to, item.target || '_self')
+    } else {
+      router.push(item.to)
+    }
   }
+  
+  open.value = false
+  
+  nextTick(() => {
+    selectedItem.value = null
+  })
+}
+
+function handleClose() {
   open.value = false
 }
 
-const toggleTerminal = () => {
+function handleModalClose() {
+  selectedItem.value = null
+}
+
+function toggleTerminal() {
+  selectedItem.value = null
+  
   open.value = !open.value
 }
 

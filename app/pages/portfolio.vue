@@ -54,7 +54,11 @@
             <template v-for="project in projects" :key="project.label" #[project.label]>
               <p class="mb-4">{{ project.content }}</p>
               <div class="relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-md">
-                <div :ref="el => { if (el) videoRefs[project.label] = el }" class="absolute top-0 left-0 w-full h-full"></div>
+                <ScriptYouTubePlayer ref="video" :video-id="project.videoId">
+                  <template #placeholder="{ placeholder }">
+                    <img :src="placeholder" alt="Video Placeholder" class="absolute top-0 left-0 w-full h-full">
+                  </template>
+                </ScriptYouTubePlayer>
               </div>
             </template>
           </UTabs>
@@ -64,7 +68,6 @@
           </p>
           <UButton
             block
-            color="red"
             icon="i-ri-youtube-fill"
             size="lg"
             :to="runtimeConfig.public.portfolioYoutubePlaylist"
@@ -80,7 +83,7 @@
         <UCard>
           <h3 class="text-lg font-medium mb-3">I can make a custom Discord bot/website for you!</h3>
           <p class="mb-2">
-            I made this website all by myself, using Nuxt.js!
+            I made this website all by myself!
           </p>
           <p class="mb-4">You can see my other projects on my GitHub!</p>
           <UButton
@@ -111,85 +114,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const runtimeConfig = useRuntimeConfig()
 
-// Extract video IDs from the URLs
-const getVideoId = (url: string): string => {
-  // Handle YouTube URLs in different formats
-  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i
-  const match = url.match(regex)
-  return match ? match[1] : ''
-}
-
+// Projects data
 const projects = [
   {
     icon: 'i-ri-movie-2-fill',
     label: 'Basic',
     content:
       'Does not include captions & their animation, just some camera movements to make your clip more engaging 👀',
-    videoSrc: runtimeConfig.public.portfolioBasicVideo,
-    videoId: ref('')
+    videoId: runtimeConfig.public.portfolioBasicVideo
   },
   {
     icon: 'i-ri-movie-2-ai-fill',
     label: 'Advanced',
     content:
       'Includes animated captions (different styles), smooth camera animations, memes, image animations and more!',
-    videoSrc: runtimeConfig.public.portfolioAdvancedVideo,
-    videoId: ref('')
+    videoId: runtimeConfig.public.portfolioAdvancedVideo
   },
 ]
 
-// Set video IDs
-onMounted(() => {
-  projects.forEach(project => {
-    project.videoId = getVideoId(project.videoSrc)
-  })
-})
-
-// Setup YouTube Player integration
-const { onLoaded } = useScriptYouTubePlayer()
-
-// Create refs for the video elements
-const videoRefs = reactive({} as Record<string, HTMLElement>)
-const players = reactive({} as Record<string, any>)
+// Active tab tracking
 const activeTab = ref(projects[0].label)
-
-// Initialize the YouTube players when the script is loaded
-onLoaded(async ({ YT }) => {
-  // Wait for the internal YouTube APIs to be ready
-  const YouTube = await YT
-  await new Promise<void>((resolve) => {
-    if (typeof YouTube.Player === 'undefined')
-      YouTube.ready(resolve)
-    else
-      resolve()
-  })
-
-  // Initialize players for each tab
-  for (const project of projects) {
-    if (videoRefs[project.label] && project.videoId) {
-      players[project.label] = new YouTube.Player(videoRefs[project.label], {
-        videoId: project.videoId,
-        playerVars: {
-          autoplay: 0,
-          controls: 1,
-          rel: 0,
-          modestbranding: 1
-        }
-      })
-    }
-  }
-})
 
 // Handle tab change
 function handleTabChange(label: string) {
-  // Pause video in previous tab
-  if (activeTab.value !== label && players[activeTab.value] && typeof players[activeTab.value].pauseVideo === 'function') {
-    players[activeTab.value].pauseVideo()
-  }
   activeTab.value = label
 }
 </script>
