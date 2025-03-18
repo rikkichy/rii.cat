@@ -5,7 +5,7 @@ RUN bun install --frozen-lockfile
 COPY . .
 RUN bun run build
 
-FROM oven/bun:latest-slim
+FROM oven/bun:latest
 WORKDIR /usr/src/nuxt-app
 COPY --from=builder /usr/src/nuxt-app/.output ./.output
 COPY --from=builder /usr/src/nuxt-app/public ./public
