@@ -1,8 +1,14 @@
 <template>
   <UContainer class="flex flex-col items-center justify-center h-screen">
     <UCard class="w-full max-w-md text-center">
-      <img src="../error.gif" alt="Error GIF" class="w-32 h-32 mb-4 mx-auto rounded-lg" />
-      <h1 class="text-2xl font-bold mb-2">{{ error.statusCode }} Error</h1>
+      <NuxtImg
+          src="error.gif"
+          format="gif"
+          loading="eager"
+          alt="Shiroko :3"
+          class="mx-auto"
+      />
+      <h1 class="text-2xl font-bold mb-2">Uh-Oh.. {{ error.statusCode }}</h1>
       <p class="text-lg mb-4">{{ getErrorMessage }}</p>
       <UProgress :value="(countdown / 4) * 100" class="mb-4" />
       <p class="text-gray-600 dark:text-gray-400 mb-4">Redirecting to home in {{ countdown }} seconds...</p>
