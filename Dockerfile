@@ -1,19 +1,26 @@
-FROM oven/bun:latest AS builder
-WORKDIR /usr/src/nuxt-app
-COPY package*.json bun.lock ./
-RUN bun install --frozen-lockfile
+# Took it from nuxt website, lets try idk
+# use the official Bun image
+# see all versions at https://hub.docker.com/r/oven/bun/tags
+FROM oven/bun:1 AS build
+WORKDIR /app
+
+COPY package.json bun.lockb ./
+
+# use ignore-scripts to avoid builting node modules like better-sqlite3
+RUN bun install --frozen-lockfile --ignore-scripts
+
+# Copy the entire project
 COPY . .
-RUN bun x nuxi generate
 
-FROM oven/bun:latest
-WORKDIR /usr/src/nuxt-app
-COPY --from=builder /usr/src/nuxt-app/.output ./.output
-COPY --from=builder /usr/src/nuxt-app/public ./public
-COPY --from=builder /usr/src/nuxt-app/package.json /usr/src/nuxt-app/bun.lock ./
-RUN bun install --production
+RUN bun --bun run build
 
-ENV NODE_ENV=production
-ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=3000
-EXPOSE 3000
-ENTRYPOINT ["bun", "run", ".output/server/index.mjs"]
+# copy production dependencies and source code into final image
+FROM oven/bun:1 AS production
+WORKDIR /app
+
+# Only `.output` folder is needed from the build stage
+COPY --from=build /app/.output /app
+
+# run the app
+EXPOSE 3000/tcp
+ENTRYPOINT [ "bun", "--bun", "run", "/app/server/index.mjs" ]
