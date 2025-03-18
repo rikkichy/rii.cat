@@ -58,38 +58,56 @@
 
       <h2 class="text-lg font-semibold max-w-2xl mx-auto mb-4">Socials</h2>
       <div class="max-w-2xl mx-auto mb-8 space-y-3">
-        <UCard v-for="link in getSocialLinks" :key="link.name">
-          <NuxtLink :to="link.url" target="_blank" rel="noopener" class="flex items-center justify-between p-3">
-            <div class="flex items-center gap-3">
-              <UIcon :name="link.icon" class="w-5 h-5" />
-              <span>{{ link.name }}</span>
-            </div>
-            <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
-          </NuxtLink>
-        </UCard>
+        <UButton
+          v-for="link in getSocialLinks" 
+          :key="link.name"
+          block
+          color="error"
+          size="xl"
+          variant="ghost"
+          class="justify-between p-3"
+          @click="navigateTo(link.url, { external: true })"
+        >
+          <div class="flex items-center gap-3">
+            <UIcon :name="link.icon" class="w-5 h-5" />
+            <span>{{ link.name }}</span>
+          </div>
+          <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
+        </UButton>
       </div>
 
       <h2 class="text-lg font-semibold max-w-2xl mx-auto mb-4">Other</h2>
       <div class="max-w-2xl mx-auto mb-8 space-y-3">
-        <UCard>
-          <NuxtLink to="/portfolio" class="flex items-center justify-between p-3">
-            <div class="flex items-center gap-3">
-              <UIcon name="i-ri-pencil-ruler-2-fill" class="w-5 h-5" />
-              <span>{{ getProjects.portfolio }}</span>
-            </div>
-            <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
-          </NuxtLink>
-        </UCard>
-
-        <UCard disabled>
-          <div class="flex items-center justify-between p-3">
-            <div class="flex items-center gap-3">
-              <UIcon name="i-ri-chrome-fill" class="w-5 h-5" />
-              <span>{{ getProjects.xenon }}</span>
-            </div>
-            <UBadge color="gray" variant="subtle" label="Coming Soon" />
+        <UButton
+          block
+          color="neutral"
+          variant="ghost"
+          size="xl"
+          truncate
+          class="justify-between p-3"
+          @click="navigateTo('/portfolio')"
+        >
+          <div class="flex items-center gap-3">
+            <UIcon name="i-ri-pencil-ruler-2-fill" class="w-5 h-5" />
+            <span>{{ getProjects.portfolio }}</span>
           </div>
-        </UCard>
+          <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
+        </UButton>
+
+        <UButton
+          block
+          color="neutral"
+          variant="soft"
+          size="xl"
+          class="justify-between p-3"
+          disabled
+        >
+          <div class="flex items-center gap-3">
+            <UIcon name="i-ri-chrome-fill" class="w-5 h-5" />
+            <span>{{ getProjects.xenon }}</span>
+          </div>
+          <UBadge color="error" variant="subtle" label="Coming Soon" />
+        </UButton>
       </div>
     </main>
 
