@@ -1,3 +1,7 @@
+# Development
+app/pages/grem.vue
+# ---
+
 # Nuxt dev/build outputs
 .output
 .data

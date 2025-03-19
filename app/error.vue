@@ -5,7 +5,7 @@
           src="error.gif"
           format="gif"
           loading="eager"
-          alt="Shiroko :3"
+          alt="shiroko-error"
           class="mx-auto"
       />
       <h1 class="text-2xl font-bold mb-2">Uh-Oh.. {{ error.statusCode }}</h1>
@@ -60,8 +60,7 @@ onMounted(() => {
       navigateHome()
     }
   }, 1000)
-  
-  // Clean up interval on component unmount
+  //umount
   onUnmounted(() => {
     clearInterval(interval)
   })

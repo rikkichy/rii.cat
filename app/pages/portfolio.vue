@@ -117,8 +117,6 @@
 import { ref, onMounted } from 'vue'
 
 const runtimeConfig = useRuntimeConfig()
-
-// Projects data
 const projects = [
   {
     icon: 'i-ri-movie-2-fill',
@@ -136,10 +134,8 @@ const projects = [
   },
 ]
 
-// Active tab tracking
 const activeTab = ref(projects[0].label)
 
-// Handle tab change
 function handleTabChange(label: string) {
   activeTab.value = label
 }
