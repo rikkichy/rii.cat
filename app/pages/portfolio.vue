@@ -48,7 +48,7 @@
               slot: project.label,
               icon: project.icon
             }))"
-            class="mb-6"
+            color="error"
             @update:selected="handleTabChange"
           >
             <template v-for="project in projects" :key="project.label" #[project.label]>

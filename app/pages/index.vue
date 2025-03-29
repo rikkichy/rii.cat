@@ -4,7 +4,7 @@
       <div class="max-w-2xl mx-auto mb-8">
         <UCard class="text-center">
           <div class="relative mb-4">
-            <div class="h-32 bg-primary-500 rounded-t-lg"></div>
+            <div class="h-32 bg-error-500 rounded-t-lg"></div>
             <div class="absolute left-1/2 -bottom-12 transform -translate-x-1/2">
               <NuxtImg
                 src="pfp.png"
@@ -31,6 +31,7 @@
             
             <UButton
               variant="subtle"
+              color="error"
               icon="i-ri-send-plane-2-fill"
               label="Contact"
               size="xl"
