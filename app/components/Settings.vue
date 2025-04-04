@@ -13,7 +13,7 @@
         <div class="space-y-6 py-2">
           <div class="flex items-center justify-between">
             <span>Dark mode</span>
-            <USwitch v-model="isDark" />
+            <USwitch v-model="isDark" color="error" />
           </div>
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
@@ -25,10 +25,11 @@
                 <UIcon name="i-heroicons-lock-open" class="w-4 h-4 text-green-500" />
               </UTooltip>
             </div>
-            <USwitch v-model="secretEnabled" :disabled="!secretEnabled" />
+            <USwitch v-model="secretEnabled" color="success" :disabled="!secretEnabled" />
           </div>
           <UFormField label="Brainrot Level" :help="getBrainrotLabel">
             <USlider
+              color="error"
               v-model="brainrotLevel"
               :step="25"
               :min="0"

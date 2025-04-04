@@ -131,13 +131,15 @@
             <div class="flex flex-col gap-2">
               <UButton
                 block
-                color="primary"
+                size="xl"
+                color="error"
                 @click="openEmailModal"
                 label="I understand, continue"
               />
               <UButton
                 block
                 color="neutral"
+                size="xl"
                 variant="ghost"
                 @click="isContactModalOpen = false"
                 label="Go back.."
