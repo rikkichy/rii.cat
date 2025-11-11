@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ["~/assets/css/main.css", "~/assets/css/grain.css"],
+  css: ["~/assets/css/main.css"],
   nitro: {
     preset: "vercel",
   },
