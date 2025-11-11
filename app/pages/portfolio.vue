@@ -54,11 +54,11 @@
             <template v-for="project in projects" :key="project.label" #[project.label]>
               <p class="mb-4">{{ project.content }}</p>
               <div class="relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-md">
-                <ScriptYouTubePlayer ref="video" :video-id="project.videoId">
+                <LazyScriptYouTubePlayer ref="video" :video-id="project.videoId" hydrate-on-visible>
                   <template #placeholder="{ placeholder }">
                     <img :src="placeholder" alt="Video Placeholder" class="absolute top-0 left-0 w-full h-full">
                   </template>
-                </ScriptYouTubePlayer>
+                </LazyScriptYouTubePlayer>
               </div>
             </template>
           </UTabs>
@@ -114,9 +114,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 const runtimeConfig = useRuntimeConfig()
+
+definePageMeta({
+  prerender: true
+})
 const projects = [
   {
     icon: 'i-ri-movie-2-fill',

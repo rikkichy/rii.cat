@@ -111,94 +111,104 @@
       </div>
     </main>
 
-    <UModal v-model:open="isContactModalOpen">
-      <template #default>
-        <!-- Empty default slot -->
-      </template>
-      
-      <template #content>
-        <UCard>
-          <template #header>
-            <h3 class="text-lg font-semibold">Business Inquiries Only</h3>
-          </template>
+    <ClientOnly>
+      <UModal v-model:open="isContactModalOpen">
+        <template #default>
+          <!-- Empty default slot -->
+        </template>
 
-          <p class="text-gray-600 dark:text-gray-400 mb-4">
-            Please proceed only if you represent a company.
-            Fan mail will not be responded to :(
-          </p>
+        <template #content>
+          <UCard>
+            <template #header>
+              <h3 class="text-lg font-semibold">Business Inquiries Only</h3>
+            </template>
 
-          <template #footer>
-            <div class="flex flex-col gap-2">
-              <UButton
-                block
-                size="xl"
-                color="error"
-                @click="openEmailModal"
-                label="I understand, continue"
-              />
-              <UButton
-                block
-                color="neutral"
-                size="xl"
-                variant="ghost"
-                @click="isContactModalOpen = false"
-                label="Go back.."
-              />
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+              Please proceed only if you represent a company.
+              Fan mail will not be responded to :(
+            </p>
+
+            <template #footer>
+              <div class="flex flex-col gap-2">
+                <UButton
+                  block
+                  size="xl"
+                  color="error"
+                  @click="openEmailModal"
+                  label="I understand, continue"
+                />
+                <UButton
+                  block
+                  color="neutral"
+                  size="xl"
+                  variant="ghost"
+                  @click="isContactModalOpen = false"
+                  label="Go back.."
+                />
+              </div>
+            </template>
+          </UCard>
+        </template>
+      </UModal>
+
+      <UModal v-model:open="isEmailModalOpen">
+        <template #default>
+          <!-- Empty default slot -->
+        </template>
+
+        <template #content>
+          <UCard>
+            <template #header>
+              <h3 class="text-lg font-semibold">Contact</h3>
+            </template>
+
+            <div class="space-y-4 mb-4">
+
+              <UFormField label="Mail">
+                <UButton
+                  variant="ghost"
+                  icon="i-heroicons-clipboard"
+                  class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
+                  @click="copyEmail"
+                >
+                  {{ runtimeConfig.public.email }}
+                </UButton>
+              </UFormField>
+
+              <UFormField label="Manager's Discord">
+                <UButton
+                  variant="ghost"
+                  icon="i-heroicons-clipboard"
+                  class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
+                  @click="copyDiscord"
+                >
+                  {{ runtimeConfig.public.managerDiscord }}
+                </UButton>
+              </UFormField>
             </div>
-          </template>
-        </UCard>
-      </template>
-    </UModal>
 
-    <UModal v-model:open="isEmailModalOpen">
-      <template #default>
-        <!-- Empty default slot -->
-      </template>
-      
-      <template #content>
-        <UCard>
-          <template #header>
-            <h3 class="text-lg font-semibold">Contact</h3>
-          </template>
-
-          <div class="space-y-4 mb-4">
-            
-            <UFormField label="Mail">
-              <UButton
-                variant="ghost"
-                icon="i-heroicons-clipboard"
-                class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
-                @click="copyEmail"
-              >
-                {{ runtimeConfig.public.email }}
-              </UButton>
-            </UFormField>
-            
-            <UFormField label="Manager's Discord">
-              <UButton
-                variant="ghost"
-                icon="i-heroicons-clipboard"
-                class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
-                @click="copyDiscord"
-              >
-                {{ runtimeConfig.public.managerDiscord }}
-              </UButton>
-            </UFormField>
-          </div>
-
-          <p class="text-sm text-gray-500 text-center">
-            Click to copy
-          </p>
-        </UCard>
-      </template>
-    </UModal>
+            <p class="text-sm text-gray-500 text-center">
+              Click to copy
+            </p>
+          </UCard>
+        </template>
+      </UModal>
+    </ClientOnly>
   </UContainer>
 </template>
 
 <script setup lang="ts">
 const runtimeConfig = useRuntimeConfig()
-const colorMode = useColorMode()
+const toast = useToast()
+
+definePageMeta({
+  prerender: true
+})
 const useCopy = async (text) => {
+  if (typeof navigator === 'undefined' || !navigator.clipboard) {
+    return false
+  }
+
   try {
     await navigator.clipboard.writeText(text)
     return true
@@ -208,10 +218,8 @@ const useCopy = async (text) => {
   }
 }
 
-const isContactModalOpen = useState('contactModal', () => false)
-const isEmailModalOpen = useState('emailModal', () => false)
-const isSettingsModalOpen = useState('settingsModal', () => false)
-const magicEnabled = useState('magicEnabled', () => false)
+const isContactModalOpen = ref(false)
+const isEmailModalOpen = ref(false)
 const brainrotLevel = useState('brainrotLevel', () => parseInt(runtimeConfig.public.defaultBrainrotLevel) || 0)
 
 const baseLinks = [
@@ -301,7 +309,6 @@ const openEmailModal = () => {
 
 const copyEmail = async () => {
   await useCopy(runtimeConfig.public.email)
-  const toast = useToast()
   toast.add({
     title: 'Copied!',
     description: 'Now my email address is somewhere in your clipboard..',
@@ -313,7 +320,6 @@ const copyEmail = async () => {
 
 const copyDiscord = async () => {
   await useCopy(runtimeConfig.public.managerDiscord)
-  const toast = useToast()
   toast.add({
     title: 'Copied!',
     description: 'Please do not annoy my manager..',

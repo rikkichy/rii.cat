@@ -12,9 +12,12 @@
         />
       </div>
 
-      <CommandPalette ref="commandPaletteRef" @unlock-secret="secretEnabled = true" />
-      <Settings v-model="isSettingsModalOpen" />
-      <SecretHint />
+      <LazyCommandPalette
+        ref="commandPaletteRef"
+        @unlock-secret="secretEnabled = true"
+      />
+      <LazySettings v-model="isSettingsModalOpen" />
+      <LazySecretHint hydrate-on-idle />
 
       <slot />
 
@@ -36,10 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import Settings from '~/components/Settings.vue'
-import CommandPalette from '~/components/CommandPalette.vue'
-import SecretHint from '~/components/SecretHint.vue'
-
 const isSettingsModalOpen = useState('settingsModal', () => false)
 const secretEnabled = useState('secretEnabled', () => false)
 const commandPaletteRef = ref(null)

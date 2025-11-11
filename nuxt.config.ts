@@ -4,9 +4,26 @@ export default defineNuxtConfig({
 
   modules: ['@nuxt/ui', '@nuxt/eslint', '@nuxt/image', "@nuxt/scripts"],
 
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        prefetchOn: 'interaction',
+      },
+    },
+  },
+
   css: ['~/assets/css/main.css'],
   nitro: {
     preset: 'vercel',
+  },
+
+  routeRules: {
+    '/': {
+      prerender: true,
+    },
+    '/portfolio': {
+      prerender: true,
+    },
   },
 
   future: {

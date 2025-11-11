@@ -16,9 +16,9 @@ const hints = [
 
 const showRandomHint = () => {
   if (secretEnabled.value) return
-  
+
   const randomHint = hints[Math.floor(Math.random() * hints.length)]
-  
+
   toast.add({
     title: 'Hmm?',
     description: randomHint,
@@ -28,24 +28,26 @@ const showRandomHint = () => {
   })
 }
 
-watch(isSettingsModalOpen, (newValue) => {
-  if (newValue && !secretEnabled.value) {
-    const shouldShowHint = Math.random() < 0.5
-    
-    if (shouldShowHint) {
-      showRandomHint()
-    }
-  }
-})
+if (import.meta.client) {
+  watch(isSettingsModalOpen, (newValue) => {
+    if (newValue && !secretEnabled.value) {
+      const shouldShowHint = Math.random() < 0.5
 
-onMounted(() => {
-  const hintsEnabled = runtimeConfig.public.enableSecretHint === 'true'
-  if (hintsEnabled) {
-    const shouldShowHint = Math.random() < 0.2
-    
-    if (shouldShowHint) {
-      showRandomHint()
+      if (shouldShowHint) {
+        showRandomHint()
+      }
     }
-  }
-})
+  })
+
+  onMounted(() => {
+    const hintsEnabled = runtimeConfig.public.enableSecretHint === 'true'
+    if (hintsEnabled) {
+      const shouldShowHint = Math.random() < 0.2
+
+      if (shouldShowHint) {
+        showRandomHint()
+      }
+    }
+  })
+}
 </script>
