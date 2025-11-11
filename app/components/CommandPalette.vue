@@ -28,6 +28,7 @@ const secretEnabled = useState('secretEnabled', () => false)
 const brainrotLevel = useState('brainrotLevel', () => parseInt(runtimeConfig.public.defaultBrainrotLevel) || 0)
 const router = useRouter()
 const toast = useToast()
+const colorMode = useColorMode()
 
 const commandGroups = computed(() => [
   {
@@ -65,7 +66,6 @@ const commandGroups = computed(() => [
         icon: 'i-heroicons-moon',
         label: 'Toggle Dark Mode',
         onClick() {
-          const colorMode = useColorMode()
           colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
         },
       },
@@ -74,12 +74,7 @@ const commandGroups = computed(() => [
         icon: 'i-heroicons-key',
         label: 'Silver Key',
         onClick() {
-          toast.add({
-            title: 'Hmm...',
-            description: 'Seems like it doesn\'t work...',
-            icon: 'i-heroicons-lock-closed',
-            duration: 3500
-          })
+          showLockedKeyToast()
         },
       },
       {
@@ -87,12 +82,7 @@ const commandGroups = computed(() => [
         icon: 'i-heroicons-key',
         label: 'Bronze Key',
         onClick() {
-          toast.add({
-            title: 'Hmm...',
-            description: 'Seems like it doesn\'t work...',
-            icon: 'i-heroicons-lock-closed',
-            duration: 3500
-          })
+          showLockedKeyToast()
         },
       },
       {
@@ -115,12 +105,7 @@ const commandGroups = computed(() => [
         icon: 'i-heroicons-key',
         label: 'Rusty Key',
         onClick() {
-          toast.add({
-            title: 'Hmm...',
-            description: 'Seems like it doesn\'t work...',
-            icon: 'i-heroicons-lock-closed',
-            duration: 3500
-          })
+          showLockedKeyToast()
         },
       },
       {
@@ -128,12 +113,7 @@ const commandGroups = computed(() => [
         icon: 'i-heroicons-key',
         label: 'Crystal Key',
         onClick() {
-          toast.add({
-            title: 'Hmm...',
-            description: 'Seems like it doesn\'t work...',
-            icon: 'i-heroicons-lock-closed',
-            duration: 3500
-          })
+          showLockedKeyToast()
         },
       },
     ],
@@ -239,11 +219,18 @@ const commandGroups = computed(() => [
   },
 ])
 
+function showLockedKeyToast() {
+  toast.add({
+    title: 'Hmm...',
+    description: 'Seems like it doesn\'t work...',
+    icon: 'i-heroicons-lock-closed',
+    duration: 3500
+  })
+}
+
 function handleSelect(item) {
   if (!item) return
 
-  console.log('Selected item:', item)
-  
   if (item.onClick && typeof item.onClick === 'function') {
     item.onClick()
   } else if (item.onSelect && typeof item.onSelect === 'function') {
