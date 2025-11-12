@@ -41,8 +41,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // Site Information
-      siteName: process.env.NUXT_PUBLIC_SITE_NAME || "Not set",
-      siteDescription: process.env.NUXT_PUBLIC_SITE_DESCRIPTION || "Empty..",
+      siteName: process.env.NUXT_PUBLIC_SITE_NAME || "ExampleName",
+      siteDescription:
+        process.env.NUXT_PUBLIC_SITE_DESCRIPTION ||
+        "Warning: .env file is not set.",
 
       // Social Links
       discordUrl:

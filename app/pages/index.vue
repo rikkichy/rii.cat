@@ -2,7 +2,7 @@
     <UContainer>
         <main class="py-8">
             <div class="max-w-2xl mx-auto mb-8">
-                <UCard class="text-center relative overflow-hidden p-0">
+                <UCard class="text-center relative overflow-hidden rounded-4xl">
                     <!-- background (blurred avatar) -->
                     <div
                         class="absolute inset-0 bg-center bg-cover scale-110 blur-xl opacity-70 pointer-events-none"
@@ -15,7 +15,14 @@
                     />
 
                     <!-- content -->
-                    <div class="relative p-6">
+                    <div class="relative p-1">
+                        <UButton
+                            color="primary"
+                            variant="soft"
+                            size="xl"
+                            icon="i-ri-settings-2-fill"
+                            @click="isSettingsModalOpen = true"
+                        />
                         <div class="relative mb-4">
                             <div class="h-32"></div>
 
@@ -23,13 +30,13 @@
                                 class="absolute left-1/2 -bottom-12 -translate-x-1/2"
                             >
                                 <NuxtImg
-                                    src="pfp.png"
-                                    width="96"
-                                    height="96"
+                                    src="/pfp.png"
+                                    width="512"
+                                    height="512"
                                     format="webp"
                                     loading="eager"
                                     alt="Profile Picture"
-                                    class="w-24 h-24 rounded-full border-4 border-white dark:border-gray-900 object-cover"
+                                    class="w-32 h-32 rounded-full border-4 border-white dark:border-gray-900 object-cover"
                                 />
                             </div>
                         </div>
@@ -105,25 +112,6 @@
                         <span>{{ getProjects.portfolio }}</span>
                     </div>
                     <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
-                </UButton>
-
-                <UButton
-                    block
-                    color="neutral"
-                    variant="soft"
-                    size="xl"
-                    class="justify-between p-3"
-                    disabled
-                >
-                    <div class="flex items-center gap-3">
-                        <UIcon name="i-ri-chrome-fill" class="w-5 h-5" />
-                        <span>{{ getProjects.xenon }}</span>
-                    </div>
-                    <UBadge
-                        color="error"
-                        variant="subtle"
-                        label="Coming Soon"
-                    />
                 </UButton>
             </div>
         </main>
@@ -216,6 +204,16 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+    title: "Rikkichy | YouTube, Twitch, Instagram, TikTok",
+    meta: [
+        {
+            name: "description",
+            content:
+                "All Rikkichy links to YouTube, Instagram, TikTok and Twitter",
+        },
+    ],
+});
 const runtimeConfig = useRuntimeConfig();
 const toast = useToast();
 
@@ -235,7 +233,7 @@ const useCopy = async (text) => {
         return false;
     }
 };
-
+const isSettingsModalOpen = useState("settingsModal", () => false);
 const isContactModalOpen = ref(false);
 const isEmailModalOpen = ref(false);
 const brainrotLevel = useState(
@@ -292,7 +290,6 @@ const getSocialLinks = computed(() => {
 
 const getProjects = computed(() => ({
     portfolio: transformProjectName("Commissions"),
-    xenon: transformProjectName("Xenon for Twitter"),
 }));
 
 const transformSocialName = (name: string) => {
@@ -375,8 +372,8 @@ const copyDiscord = async () => {
 .grain-strong {
     background-image: url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'>\
-<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='1'/></filter>\
-<rect width='100%' height='100%' filter='url(%23n)' opacity='1'/>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3'/></filter>\
+<rect width='100%' height='100%' filter='url(%23n)' opacity='0.3'/>\
 </svg>");
     background-size: 110px 110px;
 }
