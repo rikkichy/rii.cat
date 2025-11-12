@@ -11,7 +11,7 @@
 
                     <!-- strong grain overlay -->
                     <div
-                        class="absolute inset-0 pointer-events-none grain-strong mix-blend-hard-light opacity-[0.45]"
+                        class="absolute inset-0 pointer-events-none grain mix-blend-hard-light opacity-[0.45]"
                     />
 
                     <!-- content -->
@@ -369,11 +369,11 @@ const copyDiscord = async () => {
 };
 </script>
 <style scoped>
-.grain-strong {
+.grain {
     background-image: url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'>\
-<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3'/></filter>\
-<rect width='100%' height='100%' filter='url(%23n)' opacity='0.3'/>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='1'/></filter>\
+<rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/>\
 </svg>");
     background-size: 110px 110px;
 }
