@@ -1,28 +1,25 @@
 <template>
     <UContainer>
         <main class="py-8">
-            <div class="max-w-2xl mx-auto mb-8">
-                <UCard class="text-center relative overflow-hidden rounded-4xl">
-                    <!-- background (blurred avatar) -->
+            <div class="max-w-xl mx-auto mb-8">
+                <UCard class="text-center relative overflow-hidden rounded-3xl">
+                    <div class="absolute inset-0 bg-black" />
                     <div
-                        class="absolute inset-0 bg-center bg-cover scale-110 blur-xl opacity-70 pointer-events-none"
-                        style="background-image: url(&quot;/pfp.png&quot;)"
+                        class="absolute inset-0 bg-center bg-cover scale-200 blur-xl opacity-80 pointer-events-none"
+                        :style="{ backgroundImage: `url('${backgroundUrl}')` }"
                     />
-
-                    <!-- strong grain overlay -->
                     <div
-                        class="absolute inset-0 pointer-events-none grain mix-blend-hard-light opacity-[0.45]"
+                        class="absolute inset-0 pointer-events-none grain mix-blend-multiply opacity-[0.75]"
                     />
-
-                    <!-- content -->
                     <div class="relative p-1">
-                        <UButton
-                            color="primary"
-                            variant="soft"
-                            size="xl"
-                            icon="i-ri-settings-2-fill"
-                            @click="isSettingsModalOpen = true"
-                        />
+                            <UButton
+                                    color="error"
+                                    variant="outline"
+                                    class="absolute top-2 right-4 z-10 font-bold rounded-full"
+                                    size="xl"
+                                    icon="i-ri-settings-2-fill"
+                                    @click="isSettingsModalOpen = true"
+                                />
                         <div class="relative mb-4">
                             <div class="h-32"></div>
 
@@ -33,15 +30,14 @@
                                     src="/pfp.png"
                                     width="512"
                                     height="512"
-                                    format="webp"
                                     loading="eager"
                                     alt="Profile Picture"
-                                    class="w-32 h-32 rounded-full border-4 border-white dark:border-gray-900 object-cover"
+                                    class="w-32 h-32 rounded-full border-3 border-white object-cover"
                                 />
                             </div>
                         </div>
 
-                        <div class="mt-16 space-y-4">
+                        <div class="mt-16 space-y-4 text-white">
                             <div class="flex items-center justify-center gap-2">
                                 <h1 class="text-2xl font-bold">
                                     {{ getProfileName }}
@@ -75,22 +71,49 @@
                 Socials
             </h2>
             <div class="max-w-2xl mx-auto mb-8 space-y-3">
-                <UButton
-                    v-for="link in getSocialLinks"
-                    :key="link.name"
-                    block
-                    color="error"
-                    size="xl"
-                    variant="ghost"
-                    class="justify-between p-3"
-                    @click="navigateTo(link.url, { external: true })"
-                >
-                    <div class="flex items-center gap-3">
-                        <UIcon :name="link.icon" class="w-5 h-5" />
-                        <span>{{ link.name }}</span>
+                <template v-for="link in getSocialLinks" :key="link.name">
+                    <div v-if="link.icon === 'i-ri-discord-fill'" class="flex gap-2">
+                        <UButton
+                            block
+                            color="error"
+                            size="xl"
+                            variant="ghost"
+                            class="justify-between p-3 flex-1"
+                            @click="navigateTo(link.url, { external: true })"
+                        >
+                            <div class="flex items-center gap-3">
+                                <UIcon :name="link.icon" class="w-5 h-5" />
+                                <span>{{ link.name }}</span>
+                            </div>
+                            <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
+                        </UButton>
+                        <UTooltip text="Discord Rules">
+                            <UButton
+                                color="neutral"
+                                variant="soft"
+                                size="xl"
+                                icon="i-heroicons-book-open"
+                                class="px-4"
+                                to="/rules"
+                            />
+                        </UTooltip>
                     </div>
-                    <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
-                </UButton>
+                    <UButton
+                        v-else
+                        block
+                        color="error"
+                        size="xl"
+                        variant="ghost"
+                        class="justify-between p-3"
+                        @click="navigateTo(link.url, { external: true })"
+                    >
+                        <div class="flex items-center gap-3">
+                            <UIcon :name="link.icon" class="w-5 h-5" />
+                            <span>{{ link.name }}</span>
+                        </div>
+                        <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
+                    </UButton>
+                </template>
             </div>
 
             <h2 class="text-lg font-semibold max-w-2xl mx-auto mb-4">Other</h2>
@@ -119,7 +142,6 @@
         <ClientOnly>
             <UModal v-model:open="isContactModalOpen">
                 <template #default>
-                    <!-- Empty default slot -->
                 </template>
 
                 <template #content>
@@ -160,7 +182,6 @@
 
             <UModal v-model:open="isEmailModalOpen">
                 <template #default>
-                    <!-- Empty default slot -->
                 </template>
 
                 <template #content>
@@ -204,6 +225,8 @@
 </template>
 
 <script setup lang="ts">
+const img = useImage();
+
 useHead({
     title: "Rikkichy | YouTube, Twitch, Instagram, TikTok",
     meta: [
@@ -220,6 +243,7 @@ const toast = useToast();
 definePageMeta({
     prerender: true,
 });
+
 const useCopy = async (text) => {
     if (typeof navigator === "undefined" || !navigator.clipboard) {
         return false;
@@ -236,10 +260,19 @@ const useCopy = async (text) => {
 const isSettingsModalOpen = useState("settingsModal", () => false);
 const isContactModalOpen = ref(false);
 const isEmailModalOpen = ref(false);
+
 const brainrotLevel = useState(
     "brainrotLevel",
     () => parseInt(runtimeConfig.public.defaultBrainrotLevel) || 0,
 );
+
+const backgroundUrl = computed(() => {
+    return img('/pfp.png', {
+        width: 64,
+        quality: 50,
+        format: 'webp'
+    })
+});
 
 const baseLinks = [
     {
@@ -370,11 +403,7 @@ const copyDiscord = async () => {
 </script>
 <style scoped>
 .grain {
-    background-image: url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'>\
-<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='1'/></filter>\
-<rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/>\
-</svg>");
-    background-size: 110px 110px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
 }
 </style>
