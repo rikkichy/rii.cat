@@ -9,11 +9,12 @@
                         :style="{ backgroundImage: `url('${backgroundUrl}')` }"
                     />
                     <div
+                        v-if="!reducedMotion"
                         class="absolute inset-0 pointer-events-none grain mix-blend-multiply opacity-[0.75]"
                     />
                     <div class="relative p-1">
                             <UButton
-                                    color="error"
+                                    color="primary"
                                     variant="outline"
                                     class="absolute top-2 right-4 z-10 font-bold rounded-full"
                                     size="xl"
@@ -45,7 +46,7 @@
                                 <UTooltip text="Verified silly meow">
                                     <UIcon
                                         name="i-material-symbols-verified-rounded"
-                                        class="w-6 h-6 text-primary"
+                                        class="w-6 h-6 text-primary-400"
                                     />
                                 </UTooltip>
                             </div>
@@ -56,7 +57,7 @@
 
                             <UButton
                                 variant="solid"
-                                color="error"
+                                color="primary"
                                 icon="i-ri-send-plane-2-fill"
                                 label="Contact"
                                 size="xl"
@@ -75,7 +76,7 @@
                     <div v-if="link.icon === 'i-ri-discord-fill'" class="flex gap-2">
                         <UButton
                             block
-                            color="error"
+                            color="primary"
                             size="xl"
                             variant="ghost"
                             class="justify-between p-3 flex-1"
@@ -101,7 +102,7 @@
                     <UButton
                         v-else
                         block
-                        color="error"
+                        color="primary"
                         size="xl"
                         variant="ghost"
                         class="justify-between p-3"
@@ -162,7 +163,7 @@
                                 <UButton
                                     block
                                     size="xl"
-                                    color="error"
+                                    color="primary"
                                     @click="openEmailModal"
                                     label="I understand, continue"
                                 />
@@ -226,6 +227,7 @@
 
 <script setup lang="ts">
 const img = useImage();
+const reducedMotion = useState('reducedMotion', () => false); // Add state here
 
 useHead({
     title: "Rikkichy | YouTube, Twitch, Instagram, TikTok",

@@ -1,12 +1,9 @@
 <template>
     <div>
         <UContainer>
-            <LazyCommandPalette
-                ref="commandPaletteRef"
-                @unlock-secret="secretEnabled = true"
-            />
             <LazySettings v-model="isSettingsModalOpen" />
             <LazySecretHint hydrate-on-idle />
+            <LazyCursorTrail />
 
             <slot />
 
@@ -36,26 +33,4 @@
 <script setup lang="ts">
 const isSettingsModalOpen = useState("settingsModal", () => false);
 const secretEnabled = useState("secretEnabled", () => false);
-const commandPaletteRef = ref(null);
-
-const openCommandPalette = () => {
-    if (commandPaletteRef.value) {
-        commandPaletteRef.value.toggleTerminal();
-    }
-};
-
-onMounted(() => {
-    window.addEventListener("keydown", handleKeyDown);
-});
-
-onUnmounted(() => {
-    window.removeEventListener("keydown", handleKeyDown);
-});
-
-const handleKeyDown = (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === "k") {
-        e.preventDefault();
-        openCommandPalette();
-    }
-};
 </script>
