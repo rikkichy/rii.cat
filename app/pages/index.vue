@@ -2,28 +2,39 @@
     <UContainer>
         <main class="py-8">
             <div class="max-w-xl mx-auto mb-8">
-                <UCard class="text-center relative overflow-hidden rounded-3xl">
-                    <div class="absolute inset-0 bg-black" />
+                <UCard
+                    class="text-center relative overflow-hidden rounded-3xl group ring-1 ring-gray-200 dark:ring-gray-800 border-0"
+                >
                     <div
-                        class="absolute inset-0 bg-center bg-cover scale-200 blur-xl opacity-80 pointer-events-none"
+                        class="absolute inset-0 bg-gray-50 dark:bg-neutral-950 transition-colors duration-300"
+                    />
+
+                    <div
+                        class="absolute inset-0 bg-center bg-cover blur-[80px] saturate-200 opacity-40 dark:opacity-50 scale-125 pointer-events-none"
                         :style="{ backgroundImage: `url('${backgroundUrl}')` }"
                     />
+
+                    <div
+                        class="absolute inset-0 bg-white/60 dark:bg-transparent transition-colors duration-300"
+                    />
+
                     <div
                         v-if="!reducedMotion"
-                        class="absolute inset-0 pointer-events-none grain mix-blend-multiply opacity-[0.75]"
+                        class="absolute inset-0 pointer-events-none grain mix-blend-overlay opacity-40 dark:opacity-60"
                     />
+
                     <div class="relative p-1">
-                            <UButton
-                                    color="primary"
-                                    variant="outline"
-                                    class="absolute top-2 right-4 z-10 font-bold rounded-full"
-                                    size="xl"
-                                    icon="i-ri-settings-2-fill"
-                                    @click="isSettingsModalOpen = true"
-                                />
+                        <UButton
+                            color="primary"
+                            variant="outline"
+                            class="absolute top-2 right-4 z-10 font-bold rounded-full bg-white/50 dark:bg-black/50 backdrop-blur-md border-gray-200 dark:border-gray-700"
+                            size="xl"
+                            icon="i-ri-settings-2-fill"
+                            @click="isSettingsModalOpen = true"
+                        />
+
                         <div class="relative mb-4">
                             <div class="h-32"></div>
-
                             <div
                                 class="absolute left-1/2 -bottom-12 -translate-x-1/2"
                             >
@@ -33,25 +44,36 @@
                                     height="512"
                                     loading="eager"
                                     alt="Profile Picture"
-                                    class="w-32 h-32 rounded-full border-3 border-white object-cover"
+                                    class="w-32 h-32 rounded-full border-4 border-white dark:border-gray-900 shadow-2xl object-cover relative z-10"
                                 />
+                                <div
+                                    class="absolute inset-0 rounded-full blur-xl opacity-50 dark:opacity-70 -z-10 scale-95"
+                                    :style="{
+                                        backgroundImage: `url('${backgroundUrl}')`,
+                                        backgroundSize: 'cover',
+                                    }"
+                                ></div>
                             </div>
                         </div>
 
-                        <div class="mt-16 space-y-4 text-white">
+                        <div
+                            class="mt-16 space-y-4 text-gray-900 dark:text-white"
+                        >
                             <div class="flex items-center justify-center gap-2">
-                                <h1 class="text-2xl font-bold">
+                                <h1 class="text-2xl font-bold tracking-tight">
                                     {{ getProfileName }}
                                 </h1>
                                 <UTooltip text="Verified silly meow">
                                     <UIcon
                                         name="i-material-symbols-verified-rounded"
-                                        class="w-6 h-6 text-primary-400"
+                                        class="w-6 h-6 text-primary-500 dark:text-primary-400"
                                     />
                                 </UTooltip>
                             </div>
 
-                            <p>
+                            <p
+                                class="text-gray-600 dark:text-gray-300 font-medium"
+                            >
                                 {{ getProfileDescription }}
                             </p>
 
@@ -61,6 +83,7 @@
                                 icon="i-ri-send-plane-2-fill"
                                 label="Contact"
                                 size="xl"
+                                class="font-bold shadow-lg shadow-primary-500/20"
                                 @click="openContactModal"
                             />
                         </div>
@@ -73,7 +96,10 @@
             </h2>
             <div class="max-w-2xl mx-auto mb-8 space-y-3">
                 <template v-for="link in getSocialLinks" :key="link.name">
-                    <div v-if="link.icon === 'i-ri-discord-fill'" class="flex gap-2">
+                    <div
+                        v-if="link.icon === 'i-ri-discord-fill'"
+                        class="flex gap-2"
+                    >
                         <UButton
                             block
                             color="primary"
@@ -86,7 +112,10 @@
                                 <UIcon :name="link.icon" class="w-5 h-5" />
                                 <span>{{ link.name }}</span>
                             </div>
-                            <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
+                            <UIcon
+                                name="i-heroicons-arrow-right"
+                                class="w-4 h-4"
+                            />
                         </UButton>
                         <UTooltip text="Discord Rules">
                             <UButton
@@ -142,8 +171,7 @@
 
         <ClientOnly>
             <UModal v-model:open="isContactModalOpen">
-                <template #default>
-                </template>
+                <template #default> </template>
 
                 <template #content>
                     <UCard>
@@ -182,8 +210,7 @@
             </UModal>
 
             <UModal v-model:open="isEmailModalOpen">
-                <template #default>
-                </template>
+                <template #default> </template>
 
                 <template #content>
                     <UCard>
@@ -227,7 +254,7 @@
 
 <script setup lang="ts">
 const img = useImage();
-const reducedMotion = useState('reducedMotion', () => false); // Add state here
+const reducedMotion = useState("reducedMotion", () => false); // Add state here
 
 useHead({
     title: "Rikkichy | YouTube, Twitch, Instagram, TikTok",
@@ -269,11 +296,11 @@ const brainrotLevel = useState(
 );
 
 const backgroundUrl = computed(() => {
-    return img('/pfp.png', {
+    return img("/pfp.png", {
         width: 64,
         quality: 50,
-        format: 'webp'
-    })
+        format: "webp",
+    });
 });
 
 const baseLinks = [
@@ -403,9 +430,10 @@ const copyDiscord = async () => {
     isEmailModalOpen.value = false;
 };
 </script>
+
 <style scoped>
 .grain {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.8' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
 }
 </style>
