@@ -120,7 +120,6 @@ const updateTrail = () => {
 const handleMouseMove = (e: MouseEvent) => {
   mouseX = e.clientX
   mouseY = e.clientY
-  
   if (lastMouseX === 0 && lastMouseY === 0) {
     lastMouseX = mouseX
     lastMouseY = mouseY
