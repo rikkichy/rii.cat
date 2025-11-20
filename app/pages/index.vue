@@ -2,9 +2,7 @@
     <UContainer>
         <main class="py-8">
             <div class="max-w-xl mx-auto mb-8">
-                <UCard
-                    class="text-center relative overflow-hidden rounded-3xl group ring-1 ring-gray-200 dark:ring-gray-800 border-0"
-                >
+                <UCard class="text-center relative overflow-hidden rounded-3xl">
                     <div
                         class="absolute inset-0 bg-gray-50 dark:bg-neutral-950 transition-colors duration-300"
                     />

@@ -1,7 +1,5 @@
 <template>
     <UModal v-model:open="isOpen">
-        <template #default> </template>
-
         <template #content>
             <UCard>
                 <template #header>
