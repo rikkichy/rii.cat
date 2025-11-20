@@ -174,14 +174,13 @@
                 <template #content>
                     <UCard>
                         <template #header>
-                            <h3 class="text-lg font-semibold">
-                                Business Inquiries Only
-                            </h3>
+                            <h3 class="text-lg font-bold">Wait a minute..</h3>
                         </template>
 
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">
-                            Please proceed only if you represent a company. Fan
-                            mail will not be responded to :(
+                        <p>
+                            Please proceed only if you are to send a business
+                            inquiry.
+                            <br />Fan mail will not be responded to :(
                         </p>
 
                         <template #footer>

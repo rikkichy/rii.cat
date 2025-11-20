@@ -1,3 +1,6 @@
+<template>
+    <div />
+</template>
 <script setup lang="ts">
 const runtimeConfig = useRuntimeConfig();
 const secretEnabled = useState("secretEnabled", () => false);
