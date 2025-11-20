@@ -25,9 +25,9 @@
 
                     <div class="relative p-1">
                         <UButton
-                            color="primary"
+                            color="neutral"
                             variant="outline"
-                            class="absolute top-2 right-4 z-10 font-bold rounded-full bg-white/50 dark:bg-black/50 backdrop-blur-md border-gray-200 dark:border-gray-700"
+                            class="absolute top-2 right-4 z-10 font-bold rounded-full"
                             size="xl"
                             icon="i-ri-settings-2-fill"
                             @click="isSettingsModalOpen = true"
@@ -191,17 +191,16 @@
                                 <UButton
                                     block
                                     size="xl"
-                                    color="primary"
-                                    @click="openEmailModal"
-                                    label="I understand, continue"
+                                    @click="isContactModalOpen = false"
+                                    label="Go back.."
                                 />
                                 <UButton
                                     block
-                                    color="neutral"
                                     size="xl"
+                                    color="neutral"
                                     variant="ghost"
-                                    @click="isContactModalOpen = false"
-                                    label="Go back.."
+                                    @click="openEmailModal"
+                                    label="I understand, continue"
                                 />
                             </div>
                         </template>
@@ -221,9 +220,9 @@
                         <div class="space-y-4 mb-4">
                             <UFormField label="Mail">
                                 <UButton
-                                    variant="ghost"
+                                    variant="outline"
                                     icon="i-heroicons-clipboard"
-                                    class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
+                                    class="font-mono"
                                     @click="copyEmail"
                                 >
                                     {{ runtimeConfig.public.email }}
@@ -232,19 +231,15 @@
 
                             <UFormField label="Manager's Discord">
                                 <UButton
-                                    variant="ghost"
+                                    variant="outline"
                                     icon="i-heroicons-clipboard"
-                                    class="font-mono w-full dark:bg-gray-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200"
+                                    class="font-mono"
                                     @click="copyDiscord"
                                 >
                                     {{ runtimeConfig.public.managerDiscord }}
                                 </UButton>
                             </UFormField>
                         </div>
-
-                        <p class="text-sm text-gray-500 text-center">
-                            Click to copy
-                        </p>
                     </UCard>
                 </template>
             </UModal>
