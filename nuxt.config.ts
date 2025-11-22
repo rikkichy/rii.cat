@@ -55,6 +55,12 @@ export default defineNuxtConfig({
       twitterUrl:
         process.env.NUXT_PUBLIC_TWITTER_URL ||
         "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
+      youtubeUrl:
+        process.env.NUXT_PUBLIC_YOUTUBE_URL ||
+        "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
+      tiktokUrl:
+        process.env.NUXT_PUBLIC_TIKTOK_URL ||
+        "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
       githubUrl:
         process.env.NUXT_PUBLIC_GITHUB_URL || "https://github.com/rikkichy",
 

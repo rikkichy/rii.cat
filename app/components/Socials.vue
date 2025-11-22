@@ -38,6 +38,16 @@ const baseLinks = [
         url: runtimeConfig.public.twitchUrl,
     },
     {
+        name: "YouTube",
+        icon: "i-ri-youtube-fill",
+        url: runtimeConfig.public.youtubeUrl,
+    },
+    {
+        name: "TikTok",
+        icon: "i-ri-tiktok-fill",
+        url: runtimeConfig.public.tiktokUrl,
+    },
+    {
         name: "Twitter",
         icon: "i-ri-twitter-x-fill",
         url: runtimeConfig.public.twitterUrl,
