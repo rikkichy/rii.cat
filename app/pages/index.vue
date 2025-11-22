@@ -89,82 +89,8 @@
                 </UCard>
             </div>
 
-            <h2 class="text-lg font-semibold max-w-2xl mx-auto mb-4">
-                Socials
-            </h2>
-            <div class="max-w-2xl mx-auto mb-8 space-y-3">
-                <template v-for="link in getSocialLinks" :key="link.name">
-                    <div
-                        v-if="link.icon === 'i-ri-discord-fill'"
-                        class="flex gap-2"
-                    >
-                        <UButton
-                            block
-                            color="primary"
-                            size="xl"
-                            variant="ghost"
-                            class="justify-between p-3 flex-1"
-                            @click="navigateTo(link.url, { external: true })"
-                        >
-                            <div class="flex items-center gap-3">
-                                <UIcon :name="link.icon" class="w-5 h-5" />
-                                <span>{{ link.name }}</span>
-                            </div>
-                            <UIcon
-                                name="i-heroicons-arrow-right"
-                                class="w-4 h-4"
-                            />
-                        </UButton>
-                        <UTooltip text="Discord Rules">
-                            <UButton
-                                color="neutral"
-                                variant="soft"
-                                size="xl"
-                                icon="i-heroicons-book-open"
-                                class="px-4"
-                                to="/rules"
-                            />
-                        </UTooltip>
-                    </div>
-                    <UButton
-                        v-else
-                        block
-                        color="primary"
-                        size="xl"
-                        variant="ghost"
-                        class="justify-between p-3"
-                        @click="navigateTo(link.url, { external: true })"
-                    >
-                        <div class="flex items-center gap-3">
-                            <UIcon :name="link.icon" class="w-5 h-5" />
-                            <span>{{ link.name }}</span>
-                        </div>
-                        <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
-                    </UButton>
-                </template>
-            </div>
-
-            <h2 class="text-lg font-semibold max-w-2xl mx-auto mb-4">Other</h2>
-            <div class="max-w-2xl mx-auto mb-8 space-y-3">
-                <UButton
-                    block
-                    color="neutral"
-                    variant="ghost"
-                    size="xl"
-                    truncate
-                    class="justify-between p-3"
-                    @click="navigateTo('/portfolio')"
-                >
-                    <div class="flex items-center gap-3">
-                        <UIcon
-                            name="i-ri-pencil-ruler-2-fill"
-                            class="w-5 h-5"
-                        />
-                        <span>{{ getProjects.portfolio }}</span>
-                    </div>
-                    <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
-                </UButton>
-            </div>
+            <Socials />
+            <OtherLinks />
         </main>
 
         <ClientOnly>
@@ -246,7 +172,7 @@
 
 <script setup lang="ts">
 const img = useImage();
-const reducedMotion = useState("reducedMotion", () => false); // Add state here
+const reducedMotion = useState("reducedMotion", () => false);
 
 useHead({
     title: "Rikkichy | YouTube, Twitch, Instagram, TikTok",
@@ -295,24 +221,6 @@ const backgroundUrl = computed(() => {
     });
 });
 
-const baseLinks = [
-    {
-        name: "Discord",
-        icon: "i-ri-discord-fill",
-        url: runtimeConfig.public.discordUrl,
-    },
-    {
-        name: "Twitch",
-        icon: "i-ri-twitch-fill",
-        url: runtimeConfig.public.twitchUrl,
-    },
-    {
-        name: "Twitter",
-        icon: "i-ri-twitter-x-fill",
-        url: runtimeConfig.public.twitterUrl,
-    },
-];
-
 const getProfileName = computed(() => {
     switch (brainrotLevel.value) {
         case 0:
@@ -334,47 +242,6 @@ const getProfileDescription = computed(() => {
     const baseText = runtimeConfig.public.siteDescription;
     return transformText(baseText);
 });
-
-const getSocialLinks = computed(() => {
-    return baseLinks.map((link) => ({
-        ...link,
-        name: transformSocialName(link.name),
-    }));
-});
-
-const getProjects = computed(() => ({
-    portfolio: transformProjectName("Commissions"),
-}));
-
-const transformSocialName = (name: string) => {
-    switch (brainrotLevel.value) {
-        case 25:
-            return `${name} :3`;
-        case 50:
-            return `I like my ${name} drippy 🧀`;
-        case 75:
-            return `I bought my ${name}, in Egypt`;
-        case 100:
-            return `🐈🐈 hawk tuah mah ${name.toUpperCase()} 🐈🐈`;
-        default:
-            return name;
-    }
-};
-
-const transformProjectName = (name: string) => {
-    switch (brainrotLevel.value) {
-        case 25:
-            return `Nyah ${name}`;
-        case 50:
-            return `I'VE SEEN THIS ${name} BEFORE ❌🟥`;
-        case 75:
-            return `Put the ${name} in the bag 💀🍟`;
-        case 100:
-            return `🐈🐈 hawk tuah mah ${name.toUpperCase()} 🐈🐈`;
-        default:
-            return name;
-    }
-};
 
 const transformText = (text: string) => {
     switch (brainrotLevel.value) {

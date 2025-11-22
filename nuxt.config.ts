@@ -43,8 +43,7 @@ export default defineNuxtConfig({
       // Site Information
       siteName: process.env.NUXT_PUBLIC_SITE_NAME || "ExampleName",
       siteDescription:
-        process.env.NUXT_PUBLIC_SITE_DESCRIPTION ||
-        "Warning: .env file is not set.",
+        process.env.NUXT_PUBLIC_SITE_DESCRIPTION || "ExampleDescription",
 
       // Social Links
       discordUrl:
@@ -85,11 +84,9 @@ export default defineNuxtConfig({
         process.env.NUXT_PUBLIC_PORTFOLIO_YOUTUBE_PLAYLIST ||
         "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
       portfolioBasicVideo:
-        process.env.NUXT_PUBLIC_PORTFOLIO_BASIC_VIDEO ||
-        "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
+        process.env.NUXT_PUBLIC_PORTFOLIO_BASIC_VIDEO || "dQw4w9WgXcQ",
       portfolioAdvancedVideo:
-        process.env.NUXT_PUBLIC_PORTFOLIO_ADVANCED_VIDEO ||
-        "https://github.com/rikkichy/rii.cat?tab=readme-ov-file#customization",
+        process.env.NUXT_PUBLIC_PORTFOLIO_ADVANCED_VIDEO || "dQw4w9WgXcQ",
     },
   },
 });
