@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-const enabled = useState('cursorTrailEnabled', () => false)
+const enabled = useState('cursorTrailEnabled', () => true)
 const brainrotLevel = useState('brainrotLevel', () => 0)
 
 interface TrailPoint {

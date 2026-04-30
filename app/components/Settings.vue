@@ -155,7 +155,7 @@ const brainrotLevel = useState(
     () => parseInt(runtimeConfig.public.defaultBrainrotLevel) || 0,
 );
 // Removed customTheme state
-const cursorTrailEnabled = useState("cursorTrailEnabled", () => false);
+const cursorTrailEnabled = useState("cursorTrailEnabled", () => true);
 const reducedMotion = useState("reducedMotion", () => false);
 const clickCount = ref(0);
 

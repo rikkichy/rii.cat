@@ -13,6 +13,13 @@ export default defineNuxtConfig({
   },
 
   css: ["~/assets/css/main.css"],
+  fonts: {
+    providers: {
+      bunny: false,
+      fontshare: false,
+      fontsource: false,
+    },
+  },
   nitro: {
     preset: "vercel",
   },

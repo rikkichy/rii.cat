@@ -58,22 +58,14 @@
                             #[project.label]
                         >
                             <p class="mb-4">{{ project.content }}</p>
-                            <div
-                                class="relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-md"
-                            >
+                            <div class="overflow-hidden rounded-lg shadow-md">
                                 <LazyScriptYouTubePlayer
                                     ref="video"
                                     :video-id="project.videoId"
+                                    ratio="16/9"
+                                    placeholder-object-fit="contain"
                                     hydrate-on-visible
-                                >
-                                    <template #placeholder="{ placeholder }">
-                                        <img
-                                            :src="placeholder"
-                                            alt="Video Placeholder"
-                                            class="absolute top-0 left-0 w-full h-full"
-                                        />
-                                    </template>
-                                </LazyScriptYouTubePlayer>
+                                />
                             </div>
                         </template>
                     </UTabs>
