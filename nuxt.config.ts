@@ -20,17 +20,18 @@ export default defineNuxtConfig({
       fontsource: false,
     },
   },
+  icon: {
+    serverBundle: { remote: "jsdelivr" },
+    clientBundle: { scan: true, sizeLimitKb: 256 },
+  },
   nitro: {
-    preset: "vercel",
+    preset: "vercel-static",
   },
 
   routeRules: {
-    "/": {
-      prerender: true,
-    },
-    "/portfolio": {
-      prerender: true,
-    },
+    "/": { prerender: true },
+    "/portfolio": { prerender: true },
+    "/rules": { prerender: true },
   },
 
   future: {

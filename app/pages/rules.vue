@@ -3,9 +3,13 @@
     <main class="py-8">
       <div class="max-w-3xl mx-auto">
         <div class="mb-8 rounded-2xl overflow-hidden shadow-lg">
-             <NuxtImg 
-                src="/external/discord/banner_rules.png" 
+             <NuxtImg
+                src="/external/discord/banner_rules.png"
                 alt="Discord Rules Banner"
+                format="webp"
+                quality="85"
+                sizes="100vw md:768px"
+                loading="lazy"
                 class="w-full h-auto object-cover"
             />
         </div>

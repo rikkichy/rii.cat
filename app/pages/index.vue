@@ -38,9 +38,13 @@
                             >
                                 <NuxtImg
                                     src="/pfp.png"
-                                    width="512"
-                                    height="512"
+                                    width="128"
+                                    height="128"
+                                    densities="x1 x2 x3"
+                                    format="webp"
+                                    quality="85"
                                     loading="eager"
+                                    fetchpriority="high"
                                     alt="Profile Picture"
                                     class="w-32 h-32 rounded-full border-4 border-white dark:border-gray-900 shadow-2xl object-cover relative z-10"
                                 />
